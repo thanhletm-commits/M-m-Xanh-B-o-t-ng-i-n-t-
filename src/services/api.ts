@@ -18,6 +18,7 @@ import type {
 import {
   getSupabaseClient,
   isSupabaseConfigured,
+  isTeacherAdmin,
   SUPABASE_MEDIA_BUCKET,
 } from './supabaseClient';
 
@@ -164,6 +165,22 @@ function mapSettingsRow(r: Record<string, unknown> | null): SiteSettings {
   };
 }
 
+function getPreviewData(): PublicDataPayload {
+  const { students, products, teachers, messages, memories, settings } = INITIAL_SEED_DATA;
+  return {
+    isPreview: true,
+    students,
+    products,
+    teachers,
+    approvedMessages: getApprovedWishes(messages),
+    memories,
+    settings: {
+      ...settings,
+      musicUrl: settings.musicUrl ? publicAsset(settings.musicUrl) : null,
+    },
+  };
+}
+
 export async function fetchPublicData(): Promise<PublicDataPayload> {
   const sb = getSupabaseClient();
   if (sb) {
@@ -185,6 +202,12 @@ export async function fetchPublicData(): Promise<PublicDataPayload> {
     if (tchRes.error) throw new ApiError(500, tchRes.error.message);
     if (msgRes.error) throw new ApiError(500, msgRes.error.message);
     if (memRes.error) throw new ApiError(500, memRes.error.message);
+    if (setRes.error) throw new ApiError(500, setRes.error.message);
+
+    if (isStaticPages && !setRes.data &&
+        [stuRes, prdRes, tchRes, msgRes, memRes].every(result => !result.data?.length)) {
+      return getPreviewData();
+    }
 
     return {
       students: (stuRes.data || []).map(mapStudentRow),
@@ -196,20 +219,7 @@ export async function fetchPublicData(): Promise<PublicDataPayload> {
     };
   }
 
-  if (isStaticPages) {
-    const { students, products, teachers, messages, memories, settings } = INITIAL_SEED_DATA;
-    return {
-      students,
-      products,
-      teachers,
-      approvedMessages: getApprovedWishes(messages),
-      memories,
-      settings: {
-        ...settings,
-        musicUrl: settings.musicUrl ? publicAsset(settings.musicUrl) : null,
-      },
-    };
-  }
+  if (isStaticPages) return getPreviewData();
 
   const res = await fetch('/api/public', { cache: 'no-store' });
   return handleJson<PublicDataPayload>(res);
@@ -325,6 +335,10 @@ export async function adminLogin(
     if (error || !data.user) {
       throw new ApiError(401, error?.message || 'Thông tin đăng nhập giáo viên chưa đúng.');
     }
+    if (!isTeacherAdmin(data.user.id)) {
+      await sb.auth.signOut({ scope: 'local' });
+      throw new ApiError(403, 'Tài khoản này chưa được cấp quyền quản trị giáo viên.');
+    }
     return { username: data.user.email || username };
   }
 
@@ -367,7 +381,7 @@ export async function checkAdminSession(): Promise<{
   const sb = getSupabaseClient();
   if (sb) {
     const { data } = await sb.auth.getSession();
-    if (!data.session?.user) {
+    if (!data.session?.user || !isTeacherAdmin(data.session.user.id)) {
       return { authenticated: false, mode: 'supabase' };
     }
     return {
@@ -410,6 +424,7 @@ export async function fetchAdminData(): Promise<DatabaseState> {
     if (tchRes.error) throw new ApiError(500, tchRes.error.message);
     if (msgRes.error) throw new ApiError(500, msgRes.error.message);
     if (memRes.error) throw new ApiError(500, memRes.error.message);
+    if (setRes.error) throw new ApiError(500, setRes.error.message);
 
     return {
       students: (stuRes.data || []).map(mapStudentRow),

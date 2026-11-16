@@ -343,7 +343,7 @@ export default function App() {
           <p className="font-semibold">
             Báo tường điện tử Mầm Xanh · Tập thể lớp 1/8 – Trường Tiểu học Huỳnh Ngọc Huệ
           </p>
-          {demoMode && <p>Bản xem tĩnh · Nội dung minh họa</p>}
+          {data.isPreview && <p>Nội dung minh họa</p>}
           <a
             href={isStaticPages ? adminPath + '/' : adminPath}
             className="text-xs font-semibold text-[#5C795D] underline-offset-4 hover:text-[#235F1E] hover:underline sm:ml-auto"

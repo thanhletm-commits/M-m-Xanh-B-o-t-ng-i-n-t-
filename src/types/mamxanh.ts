@@ -147,6 +147,7 @@ export interface DatabaseState {
 }
 
 export interface PublicDataPayload {
+  isPreview?: boolean;
   students: Student[];
   products: Product[];
   teachers: Teacher[];

@@ -30,6 +30,8 @@ jobs:
         env:
           VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+          VITE_SUPABASE_MEDIA_BUCKET: baotuongmamxanhlop18
+          VITE_SUPABASE_ADMIN_UID: 9f9f234b-1e3a-486c-ba94-be6f7a11722b
       - name: Create direct admin entry point
         run: |
           mkdir -p dist/admin

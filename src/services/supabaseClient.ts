@@ -4,7 +4,12 @@ const supabaseUrl = (import.meta.env.VITE_SUPABASE_URL as string | undefined)?.t
 const supabaseAnonKey =
   (import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined)?.trim() || '';
 
-export const SUPABASE_MEDIA_BUCKET = 'mam-xanh-media';
+export const SUPABASE_MEDIA_BUCKET = import.meta.env.VITE_SUPABASE_MEDIA_BUCKET?.trim() || 'mam-xanh-media';
+const teacherAdminUid = import.meta.env.VITE_SUPABASE_ADMIN_UID?.trim();
+
+export function isTeacherAdmin(userId: string): boolean {
+  return !teacherAdminUid || userId === teacherAdminUid;
+}
 
 function isValidSupabaseUrl(value: string): boolean {
   try {
