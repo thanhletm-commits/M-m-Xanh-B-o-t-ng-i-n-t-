@@ -8,31 +8,29 @@ interface StageHomeProps {
 }
 
 export function StageHome({ coverImageUrl, onExplore }: StageHomeProps) {
-  const desktopCoverSrc = coverImageUrl || publicAsset('/assets/cover-mam-xanh.jpg');
-  const mobileCoverSrc = coverImageUrl || publicAsset('/assets/cover-mam-xanh-mobile.jpg');
+  const coverSrc = coverImageUrl || publicAsset('/assets/cover-mam-xanh-20-11.png');
 
   return (
     <section
       id="home"
       aria-label="Trang chủ – Bìa báo Mầm Xanh"
-      className="relative w-full min-h-[100svh] flex items-end justify-center overflow-hidden select-none"
+      className={
+        coverImageUrl
+          ? "relative flex min-h-[100svh] w-full items-end justify-center overflow-hidden select-none"
+          : "relative flex w-full flex-col overflow-hidden bg-[#E9F6DB] select-none md:min-h-[100svh] md:justify-end"
+      }
     >
       <h1 className="sr-only">
         Mầm Xanh – Ươm yêu thương, Gặt tương lai – Báo tường điện tử chào mừng Ngày Nhà giáo Việt Nam 20/11 – Lớp 1/8 Trường Tiểu học Huỳnh Ngọc Huệ
       </h1>
 
-      {/* Desktop / Tablet Full-Screen Cover Background */}
-      <div
-        aria-hidden="true"
-        className="hidden md:block absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url("${desktopCoverSrc}")` }}
-      />
-
-      {/* Mobile Full-Screen Cover Background */}
-      <div
-        aria-hidden="true"
-        className="md:hidden absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url("${mobileCoverSrc}")` }}
+      <img
+        alt=""
+        src={coverSrc}
+        fetchPriority="high"
+        className={coverImageUrl
+          ? "absolute inset-0 h-full w-full object-cover"
+          : "aspect-[1672/941] h-auto w-full object-contain md:absolute md:inset-0 md:h-full md:object-cover"}
       />
 
       {/* Single Interactive Primary CTA Button at Bottom */}
@@ -40,7 +38,11 @@ export function StageHome({ coverImageUrl, onExplore }: StageHomeProps) {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 pb-4 sm:pb-7 md:pb-8 pl-4 pr-28 sm:px-4 flex justify-start sm:justify-center w-full"
+        className={
+          coverImageUrl
+            ? "relative z-10 flex w-full justify-start pr-28 pb-4 pl-4 sm:justify-center sm:px-4 sm:pb-7 md:pb-8"
+            : "relative z-10 flex w-full justify-center px-4 py-4 md:pt-0 md:pb-8"
+        }
       >
         <button
           type="button"
