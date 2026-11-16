@@ -1512,7 +1512,7 @@ export function AdminPage({ onBackToSite, onDataUpdated }: AdminPageProps) {
                 Quản lý 9 thầy cô, nội dung 9 phong thư & âm thanh riêng (MP3 / M4A / WAV)
               </h2>
               <p className="text-sm text-[#576E57] mt-1">
-                Mỗi phong thư giữ nguyên nội dung chữ và có thể gắn thêm 1 file ghi âm lời chúc riêng cho nút NGHE ở Chặng 4.
+                Ảnh thầy cô sẽ hiện khi mở phong thư ở Chặng 4. Bạn cũng có thể tải bản ghi âm riêng cho nút NGHE.
               </p>
             </div>
 
@@ -1545,11 +1545,18 @@ export function AdminPage({ onBackToSite, onDataUpdated }: AdminPageProps) {
                       accept="image/*"
                       className="hidden"
                       onChange={async (e) => {
-                        const url = await handleUpload(e.target.files?.[0], 'teachers');
+                        const file = e.currentTarget.files?.[0];
+                        e.currentTarget.value = "";
+                        const url = await handleUpload(file, 'teachers');
                         if (!url) return;
-                        await adminUpdateTeacher(teacher.id, { avatarUrl: url });
-                        await loadAdmin();
-                        onDataUpdated();
+                        try {
+                          await adminUpdateTeacher(teacher.id, { avatarUrl: url });
+                          await loadAdmin();
+                          onDataUpdated();
+                        } catch (err) {
+                          showToast('error', err instanceof Error ? err.message : 'Không thể lưu ảnh thầy cô.');
+                          return;
+                        }
                         showToast('success', `Đã cập nhật ảnh cho ${teacher.name}.`);
                       }}
                     />

@@ -401,6 +401,13 @@ export function Stage4SeedPlanters({
                   💌 {openTeacher.name}
                 </h3>
                 <p className="text-sm">{openTeacher.role}</p>
+                {openTeacher.avatarUrl && (
+                  <img
+                    src={publicAsset(openTeacher.avatarUrl)}
+                    alt={"Ảnh " + openTeacher.name}
+                    className="mx-auto block max-h-[36vh] w-auto max-w-full rounded-2xl object-contain"
+                  />
+                )}
                 {openTeacher.letterTitle && <h4 className="font-bold">{openTeacher.letterTitle}</h4>}
                 <div className="teacher-letter-text">{openTeacher.letterContent}</div>
 
