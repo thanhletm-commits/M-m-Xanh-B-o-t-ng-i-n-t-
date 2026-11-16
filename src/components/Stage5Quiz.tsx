@@ -1,3 +1,4 @@
+import { publicAsset } from '../lib/site';
 import { useMemo, useState } from 'react';
 import {
   ArrowLeft,
@@ -85,7 +86,7 @@ export function Stage5Quiz({ onPrev, onNext }: Stage5QuizProps) {
           </p>
           <h2 className="sr-only">ĐỐ VUI 20/11 – CÙNG BÉ KHÁM PHÁ</h2>
           <img
-            src="/assets/aistudio/___vui_20_11_c_ng_b__kh_m_ph__db8a4275.png"
+            src={publicAsset('/assets/aistudio/___vui_20_11_c_ng_b__kh_m_ph__db8a4275.png')}
             alt="Đố vui 20/11 – Cùng bé khám phá"
             className="mx-auto w-full max-w-[460px] sm:max-w-[540px] h-auto object-contain drop-shadow-[0_10px_22px_rgba(44,108,35,0.16)]"
           />
@@ -102,7 +103,7 @@ export function Stage5Quiz({ onPrev, onNext }: Stage5QuizProps) {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-[#E5F2DF]">
                 <div className="flex items-center gap-3">
                   <img
-                    src="/assets/aistudio/ef58baab-f5f3-4419-8132-ede530e27a38_e9890800.png"
+                    src={publicAsset('/assets/aistudio/ef58baab-f5f3-4419-8132-ede530e27a38_e9890800.png')}
                     alt="Biểu tượng trò chơi Đố vui 20/11"
                     className="w-14 h-14 object-contain drop-shadow-sm shrink-0"
                   />
@@ -274,7 +275,7 @@ export function Stage5Quiz({ onPrev, onNext }: Stage5QuizProps) {
             >
               <div className="relative inline-flex items-center justify-center mb-5">
                 <img
-                  src="/assets/be-mam-xanh.png"
+                  src={publicAsset('/assets/be-mam-xanh.png')}
                   alt="Bé Mầm Xanh chúc mừng"
                   className="w-28 h-28 object-contain drop-shadow-md"
                 />

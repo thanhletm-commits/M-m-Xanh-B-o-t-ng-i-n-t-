@@ -1,3 +1,4 @@
+import { isStaticPages, publicAsset } from './lib/site';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AdminPage } from './components/AdminPage';
 import { FallingPetals } from './components/FallingPetals';
@@ -32,7 +33,7 @@ function getInitialRoute(): { isAdmin: boolean; stage: StageId; hasDeepLink: boo
   }
   const path = window.location.pathname;
   const hash = window.location.hash;
-  if (path === '/admin' || hash === '#admin') {
+  if (!isStaticPages && (path === '/admin' || hash === '#admin')) {
     return { isAdmin: true, stage: 'home', hasDeepLink: false };
   }
   const hashStage = hash.replace('#', '') as StageId;
@@ -248,7 +249,7 @@ export default function App() {
     return (
       <div className="min-h-screen bg-[#FFFDF7] flex flex-col items-center justify-center p-6 text-center">
         <img
-          src="/assets/be-mam-xanh.png"
+          src={publicAsset('/assets/be-mam-xanh.png')}
           alt="Bé Mầm Xanh"
           className="w-28 h-28 object-contain animate-bounce mb-4"
         />
@@ -325,7 +326,7 @@ export default function App() {
         <Stage4SeedPlanters
           teachers={data.teachers}
           approvedMessages={data.approvedMessages}
-          onOpenWishModal={() => setWishModalOpen(true)}
+          onOpenWishModal={isStaticPages ? undefined : () => setWishModalOpen(true)}
           onTeacherAudioStart={handleTeacherAudioStart}
           onTeacherAudioStop={handleTeacherAudioStop}
           onPrev={() => scrollToStage('stage3')}
@@ -349,20 +350,24 @@ export default function App() {
           <p className="font-semibold">
             Báo tường điện tử Mầm Xanh · Tập thể lớp 1/8 – Trường Tiểu học Huỳnh Ngọc Huệ
           </p>
-          <button
-            type="button"
-            onClick={openAdmin}
-            className="text-xs font-semibold text-[#5C795D] hover:text-[#235F1E] underline-offset-4 hover:underline cursor-pointer"
-          >
-            Dành cho giáo viên quản trị
-          </button>
+          {isStaticPages ? (
+            <p>Bản xem tĩnh · Nội dung minh họa</p>
+          ) : (
+            <button
+              type="button"
+              onClick={openAdmin}
+              className="text-xs font-semibold text-[#5C795D] hover:text-[#235F1E] underline-offset-4 hover:underline cursor-pointer"
+            >
+              Dành cho giáo viên quản trị
+            </button>
+          )}
         </div>
       </footer>
 
       <MascotDialog dialogue={currentDialogue} stageKey={currentStage} />
 
       <FloatingActions
-        onOpenWishModal={() => setWishModalOpen(true)}
+        onOpenWishModal={isStaticPages ? undefined : () => setWishModalOpen(true)}
         isPlaying={isPlaying}
         volume={volume}
         musicTitle={data.settings.musicTitle}

@@ -1,3 +1,4 @@
+import { publicAsset } from '../lib/site';
 import { useState } from 'react';
 import {
   Camera,
@@ -76,7 +77,7 @@ export function MascotDialog({ dialogue, stageKey }: MascotDialogProps) {
         className="pointer-events-auto relative shrink-0 group cursor-pointer focus-visible:outline-2 focus-visible:outline-[#4E9F3D] rounded-full"
       >
         <img
-          src="/assets/be-mam-xanh.png"
+          src={publicAsset('/assets/be-mam-xanh.png')}
           alt="Bé Mầm Xanh"
           className="w-14 h-18 sm:w-20 sm:h-24 object-contain drop-shadow-[0_10px_14px_rgba(46,98,37,0.22)] transition-transform duration-200 group-hover:scale-105"
         />

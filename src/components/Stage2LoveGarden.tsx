@@ -1,3 +1,4 @@
+import { publicAsset } from '../lib/site';
 import { useEffect, useState } from 'react';
 import {
   ArrowLeft,
@@ -75,7 +76,7 @@ export function Stage2LoveGarden({
           </p>
           <h2 className="sr-only">VƯỜN YÊU THƯƠNG</h2>
           <img
-            src="/assets/aistudio/V__n_Y_u_Th__ng_Mascot_Banner_5e1d1bc9.png"
+            src={publicAsset('/assets/aistudio/V__n_Y_u_Th__ng_Mascot_Banner_5e1d1bc9.png')}
             alt="Vườn yêu thương"
             className="mx-auto w-full max-w-[460px] sm:max-w-[540px] h-auto object-contain drop-shadow-[0_10px_22px_rgba(44,108,35,0.16)]"
           />

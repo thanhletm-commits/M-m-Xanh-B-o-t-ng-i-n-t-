@@ -3,7 +3,7 @@ import { Volume2, X } from 'lucide-react';
 import { MusicLeafIcon } from './MusicPlayer';
 
 interface FloatingActionsProps {
-  onOpenWishModal: () => void;
+  onOpenWishModal?: () => void;
   isPlaying: boolean;
   volume: number;
   musicTitle: string;
@@ -93,18 +93,20 @@ export function FloatingActions({
       )}
 
       {/* Top Button: GỬI LỜI TRI ÂN (Peach-Pink 3D) */}
-      <button
-        type="button"
-        onClick={onOpenWishModal}
-        title="Gửi lời tri ân đến thầy cô"
-        aria-label="Gửi lời tri ân"
-        className="pointer-events-auto inline-flex items-center justify-center gap-2 px-3 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-gradient-to-b from-[#FF7A9E] via-[#F45B84] to-[#E11D48] text-white border border-white/45 shadow-[0_4px_0_#9F1239,0_12px_24px_-6px_rgba(225,29,72,0.42)] hover:-translate-y-0.5 hover:brightness-105 active:translate-y-0.5 transition-all duration-150 cursor-pointer focus-visible:outline-2 focus-visible:outline-[#9F1239]"
-      >
-        <Heart3DIcon />
-        <span className="hidden sm:inline font-display font-extrabold text-xs md:text-sm tracking-wide whitespace-nowrap">
-          GỬI LỜI TRI ÂN
-        </span>
-      </button>
+      {onOpenWishModal && (
+        <button
+          type="button"
+          onClick={onOpenWishModal}
+          title="Gửi lời tri ân đến thầy cô"
+          aria-label="Gửi lời tri ân"
+          className="pointer-events-auto inline-flex items-center justify-center gap-2 px-3 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-gradient-to-b from-[#FF7A9E] via-[#F45B84] to-[#E11D48] text-white border border-white/45 shadow-[0_4px_0_#9F1239,0_12px_24px_-6px_rgba(225,29,72,0.42)] hover:-translate-y-0.5 hover:brightness-105 active:translate-y-0.5 transition-all duration-150 cursor-pointer focus-visible:outline-2 focus-visible:outline-[#9F1239]"
+        >
+          <Heart3DIcon />
+          <span className="hidden sm:inline font-display font-extrabold text-xs md:text-sm tracking-wide whitespace-nowrap">
+            GỬI LỜI TRI ÂN
+          </span>
+        </button>
+      )}
 
       {/* Bottom Button: NHẠC NỀN + Expandable Volume Control */}
       <div className="pointer-events-auto relative flex flex-col items-end">

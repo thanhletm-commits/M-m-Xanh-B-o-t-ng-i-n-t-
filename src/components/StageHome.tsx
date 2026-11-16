@@ -1,3 +1,4 @@
+import { publicAsset } from '../lib/site';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -7,8 +8,8 @@ interface StageHomeProps {
 }
 
 export function StageHome({ coverImageUrl, onExplore }: StageHomeProps) {
-  const desktopCoverSrc = coverImageUrl || '/assets/cover-mam-xanh.jpg';
-  const mobileCoverSrc = coverImageUrl || '/assets/cover-mam-xanh-mobile.jpg';
+  const desktopCoverSrc = coverImageUrl || publicAsset('/assets/cover-mam-xanh.jpg');
+  const mobileCoverSrc = coverImageUrl || publicAsset('/assets/cover-mam-xanh-mobile.jpg');
 
   return (
     <section

@@ -1,3 +1,4 @@
+import { publicAsset } from '../lib/site';
 import { ArrowLeft, Home, Sun } from 'lucide-react';
 import { motion } from 'motion/react';
 import stage5SunriseImg from '../assets/images/stage5_sunrise_garden_1794711408824.jpg';
@@ -34,7 +35,7 @@ export function Stage6Sunlight({ settings, onPrev, onHome }: Stage6Props) {
           </p>
           <h2 className="sr-only">VƯƠN MÌNH ĐÓN NẮNG</h2>
           <img
-            src="/assets/aistudio/e8c3c696-e7bf-4718-b110-8ed8f8602ed6_10ba1ded.png"
+            src={publicAsset('/assets/aistudio/e8c3c696-e7bf-4718-b110-8ed8f8602ed6_10ba1ded.png')}
             alt="Vươn mình đón nắng"
             className="mx-auto w-full max-w-[460px] sm:max-w-[540px] h-auto object-contain drop-shadow-[0_10px_22px_rgba(44,108,35,0.16)]"
           />

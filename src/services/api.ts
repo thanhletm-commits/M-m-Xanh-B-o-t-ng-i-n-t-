@@ -1,3 +1,5 @@
+import { isStaticPages, publicAsset } from '../lib/site';
+import { getApprovedWishes } from '../lib/mamxanh';
 import { INITIAL_SEED_DATA } from '../data/seedData';
 import type {
   DatabaseState,
@@ -188,6 +190,21 @@ export async function fetchPublicData(): Promise<PublicDataPayload> {
       approvedMessages: (msgRes.data || []).map(mapWishRow),
       memories: (memRes.data || []).map(mapMemoryRow),
       settings: mapSettingsRow((setRes.data as Record<string, unknown> | null) || null),
+    };
+  }
+
+  if (isStaticPages) {
+    const { students, products, teachers, messages, memories, settings } = INITIAL_SEED_DATA;
+    return {
+      students,
+      products,
+      teachers,
+      approvedMessages: getApprovedWishes(messages),
+      memories,
+      settings: {
+        ...settings,
+        musicUrl: settings.musicUrl ? publicAsset(settings.musicUrl) : null,
+      },
     };
   }
 

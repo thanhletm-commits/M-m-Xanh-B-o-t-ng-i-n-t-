@@ -1,3 +1,4 @@
+import { publicAsset } from '../lib/site';
 import { useState } from 'react';
 import { ArrowLeft, ArrowRight, Sparkles } from 'lucide-react';
 import { motion } from 'motion/react';
@@ -32,7 +33,7 @@ export function Stage1FirstSprout({ settings, onPrev, onNext }: Stage1Props) {
           </p>
           <h2 className="sr-only">{settings.introTitle}</h2>
           <img
-            src="/assets/aistudio/Cheerful_First_Sprout_Garden_Banner_9a14a516.png"
+            src={publicAsset('/assets/aistudio/Cheerful_First_Sprout_Garden_Banner_9a14a516.png')}
             alt={settings.introTitle}
             className="mx-auto w-full max-w-[460px] sm:max-w-[540px] h-auto object-contain drop-shadow-[0_10px_22px_rgba(44,108,35,0.16)]"
           />
@@ -68,7 +69,7 @@ export function Stage1FirstSprout({ settings, onPrev, onNext }: Stage1Props) {
               >
                 <div className="w-48 sm:w-56 mb-4 rounded-2xl overflow-hidden shadow-md border border-[#F3E6CE] bg-white animate-gentle-sway">
                   <img
-                    src="/assets/aistudio/Whimsical_Airmail_Envelope_with_Flowers_and_Books_41920d7f.png"
+                    src={publicAsset('/assets/aistudio/Whimsical_Airmail_Envelope_with_Flowers_and_Books_41920d7f.png')}
                     alt="Phong thư lời ngỏ gửi thầy cô lớp 1/8"
                     className="w-full h-auto object-contain"
                   />

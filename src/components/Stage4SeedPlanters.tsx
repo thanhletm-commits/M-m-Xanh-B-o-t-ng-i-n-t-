@@ -1,3 +1,4 @@
+import { publicAsset } from '../lib/site';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ArrowLeft,
@@ -24,7 +25,7 @@ import { WishFormFields } from './WishModal';
 interface Stage4Props {
   teachers: Teacher[];
   approvedMessages: WishMessage[];
-  onOpenWishModal: () => void;
+  onOpenWishModal?: () => void;
   onTeacherAudioStart?: () => void;
   onTeacherAudioStop?: () => void;
   onPrev: () => void;
@@ -158,7 +159,7 @@ export function Stage4SeedPlanters({
   const handleOpenWishFromEnvelope = () => {
     stopTeacherAudio();
     setOpenTeacher(null);
-    onOpenWishModal();
+    onOpenWishModal?.();
   };
 
   const handleToggleTeacherAudio = async () => {
@@ -198,7 +199,7 @@ export function Stage4SeedPlanters({
           </p>
           <h2 className="sr-only">NGƯỜI GIEO MẦM</h2>
           <img
-            src="/assets/aistudio/Ng__i_Gieo_M_m__Nurturing_Joy_3a5c6dbf.png"
+            src={publicAsset('/assets/aistudio/Ng__i_Gieo_M_m__Nurturing_Joy_3a5c6dbf.png')}
             alt="Người gieo mầm"
             className="mx-auto w-full max-w-[460px] sm:max-w-[540px] h-auto object-contain drop-shadow-[0_10px_22px_rgba(44,108,35,0.16)]"
           />
@@ -231,7 +232,7 @@ export function Stage4SeedPlanters({
                   <div className="flex items-center gap-3">
                     <div className="w-20 h-14 rounded-2xl bg-white border border-[#EADBC0] shadow-sm p-1 flex items-center justify-center shrink-0 overflow-hidden transition-transform duration-200 group-hover:scale-105 group-hover:-rotate-2">
                       <img
-                        src="/assets/aistudio/Whimsical_Airmail_Envelope_with_Flowers_and_Books_41920d7f.png"
+                        src={publicAsset('/assets/aistudio/Whimsical_Airmail_Envelope_with_Flowers_and_Books_41920d7f.png')}
                         alt=""
                         aria-hidden="true"
                         className="w-full h-full object-contain"
@@ -279,7 +280,7 @@ export function Stage4SeedPlanters({
                 <div className="mt-4 pt-3 border-t border-[#F0E8D6] flex items-center justify-between text-xs font-bold text-[#4E9F3D]">
                   <span className="inline-flex items-center gap-2">
                     <img
-                      src="/assets/aistudio/Whimsical_Airmail_Envelope_with_Flowers_and_Books_41920d7f.png"
+                      src={publicAsset('/assets/aistudio/Whimsical_Airmail_Envelope_with_Flowers_and_Books_41920d7f.png')}
                       alt=""
                       aria-hidden="true"
                       className="w-5 h-3.5 object-contain shrink-0"
@@ -338,7 +339,7 @@ export function Stage4SeedPlanters({
             />
 
             <img
-              src="/assets/aistudio/C_y_Tri__n_Blossoming_in_Sunshine_2d203873.png"
+              src={publicAsset('/assets/aistudio/C_y_Tri__n_Blossoming_in_Sunshine_2d203873.png')}
               alt="Cây Tri Ân lớp 1/8 tỏa bóng mát và hoa thơm"
               className="w-full h-full object-contain select-none pointer-events-none drop-shadow-[0_12px_24px_rgba(52,110,41,0.18)]"
             />
@@ -388,7 +389,7 @@ export function Stage4SeedPlanters({
             {heartNodes.length === 0 && (
               <div className="absolute inset-0 flex items-center justify-center p-6 text-center">
                 <p className="bg-white/90 px-5 py-3 rounded-2xl text-sm font-bold text-[#3C5C3D] shadow-sm">
-                  Chưa có trái tim lời chúc nào ở nhánh này. Hãy gửi lời tri ân ở phía dưới nhé!
+                  Chưa có trái tim lời chúc nào ở nhánh này.{onOpenWishModal && ' Hãy gửi lời tri ân ở phía dưới nhé!'}
                 </p>
               </div>
             )}
@@ -396,51 +397,53 @@ export function Stage4SeedPlanters({
         </div>
 
         {/* Bottom Section: Compliant Free-Text Student-to-Teacher Wish Form (Text + Optional Card Image only) */}
-        <div
-          id="gui-loi-chuc"
-          ref={wishSectionRef}
-          className="max-w-3xl mx-auto rounded-[32px] bg-[#FFFDF8] border-2 border-[#D2ECCB] shadow-[0_20px_50px_-15px_rgba(48,105,39,0.18)] overflow-hidden"
-        >
-          <div className="px-6 py-5 bg-gradient-to-r from-[#E5F7E1] to-[#FEF3C7]/75 border-b border-[#DCEFD6] flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-            <div className="flex flex-col sm:flex-row items-center gap-4">
-              <img
-                src="/assets/aistudio/Whimsical_Airmail_Envelope_with_Flowers_and_Books_41920d7f.png"
-                alt="Phong thư gửi thầy cô"
-                className="w-24 h-16 rounded-xl object-cover border border-[#EADBC0] shadow-xs shrink-0"
-              />
-              <div>
-                <p className="text-xs font-bold uppercase tracking-wider text-[#D97706]">
-                  Góc gửi yêu thương
-                </p>
-                <h3 className="font-display font-black text-2xl sm:text-3xl text-[#1F581B] mt-0.5">
-                  HỌC SINH GỬI LỜI TRI ÂN ĐẾN THẦY/CÔ
-                </h3>
-                <p className="text-xs sm:text-sm text-[#4A654B] mt-1">
-                  Em hãy tự nhập tên mình và tên thầy cô mà em muốn tri ân nhé. Lời chúc sẽ ở trạng thái chờ duyệt trước khi nở trái tim trên Cây tri ân.
-                </p>
+        {onOpenWishModal && (
+          <div
+            id="gui-loi-chuc"
+            ref={wishSectionRef}
+            className="max-w-3xl mx-auto rounded-[32px] bg-[#FFFDF8] border-2 border-[#D2ECCB] shadow-[0_20px_50px_-15px_rgba(48,105,39,0.18)] overflow-hidden"
+          >
+            <div className="px-6 py-5 bg-gradient-to-r from-[#E5F7E1] to-[#FEF3C7]/75 border-b border-[#DCEFD6] flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+              <div className="flex flex-col sm:flex-row items-center gap-4">
+                <img
+                  src={publicAsset('/assets/aistudio/Whimsical_Airmail_Envelope_with_Flowers_and_Books_41920d7f.png')}
+                  alt="Phong thư gửi thầy cô"
+                  className="w-24 h-16 rounded-xl object-cover border border-[#EADBC0] shadow-xs shrink-0"
+                />
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-[#D97706]">
+                    Góc gửi yêu thương
+                  </p>
+                  <h3 className="font-display font-black text-2xl sm:text-3xl text-[#1F581B] mt-0.5">
+                    HỌC SINH GỬI LỜI TRI ÂN ĐẾN THẦY/CÔ
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#4A654B] mt-1">
+                    Em hãy tự nhập tên mình và tên thầy cô mà em muốn tri ân nhé. Lời chúc sẽ ở trạng thái chờ duyệt trước khi nở trái tim trên Cây tri ân.
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
 
-          {wishFormExpanded ? (
-            <WishFormFields
-              idPrefix="stage4-wish"
-              showCloseButton
-              onClose={() => setWishFormExpanded(false)}
-            />
-          ) : (
-            <div className="p-6 text-center">
-              <button
-                type="button"
-                onClick={() => setWishFormExpanded(true)}
-                className="garden-btn-sunny inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-[#4A2C00] font-display font-extrabold text-sm cursor-pointer"
-              >
-                <Heart className="w-4 h-4 fill-current text-[#E11D48]" aria-hidden="true" />
-                <span>Mở biểu mẫu gửi lời tri ân</span>
-              </button>
-            </div>
-          )}
-        </div>
+            {wishFormExpanded ? (
+              <WishFormFields
+                idPrefix="stage4-wish"
+                showCloseButton
+                onClose={() => setWishFormExpanded(false)}
+              />
+            ) : (
+              <div className="p-6 text-center">
+                <button
+                  type="button"
+                  onClick={() => setWishFormExpanded(true)}
+                  className="garden-btn-sunny inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-[#4A2C00] font-display font-extrabold text-sm cursor-pointer"
+                >
+                  <Heart className="w-4 h-4 fill-current text-[#E11D48]" aria-hidden="true" />
+                  <span>Mở biểu mẫu gửi lời tri ân</span>
+                </button>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Stage Navigation Footer */}
         <div className="mt-12 flex flex-wrap items-center justify-between gap-4">
@@ -615,14 +618,16 @@ export function Stage4SeedPlanters({
                   >
                     ĐÓNG
                   </button>
-                  <button
-                    type="button"
-                    onClick={handleOpenWishFromEnvelope}
-                    className="garden-btn-sunny inline-flex items-center gap-2 px-5 py-3 rounded-2xl text-[#4A2C00] font-display font-extrabold text-sm cursor-pointer"
-                  >
-                    <Send className="w-4 h-4" aria-hidden="true" />
-                    <span>GỬI LỜI TRI ÂN</span>
-                  </button>
+                  {onOpenWishModal && (
+                    <button
+                      type="button"
+                      onClick={handleOpenWishFromEnvelope}
+                      className="garden-btn-sunny inline-flex items-center gap-2 px-5 py-3 rounded-2xl text-[#4A2C00] font-display font-extrabold text-sm cursor-pointer"
+                    >
+                      <Send className="w-4 h-4" aria-hidden="true" />
+                      <span>GỬI LỜI TRI ÂN</span>
+                    </button>
+                  )}
                 </div>
               </div>
             </motion.div>

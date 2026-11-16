@@ -1,3 +1,4 @@
+import { publicAsset } from '../lib/site';
 import { useEffect, useState } from 'react';
 import {
   ArrowLeft,
@@ -64,7 +65,7 @@ export function Stage3UnderCanopy({ memories, onPrev, onNext }: Stage3Props) {
           </p>
           <h2 className="sr-only">DƯỚI TÁN XANH</h2>
           <img
-            src="/assets/aistudio/D__i_T_n_Xanh_Banner_7fbba9df.png"
+            src={publicAsset('/assets/aistudio/D__i_T_n_Xanh_Banner_7fbba9df.png')}
             alt="Dưới tán xanh"
             className="mx-auto w-full max-w-[460px] sm:max-w-[540px] h-auto object-contain drop-shadow-[0_10px_22px_rgba(44,108,35,0.16)]"
           />

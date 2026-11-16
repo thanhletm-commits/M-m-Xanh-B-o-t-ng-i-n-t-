@@ -1,3 +1,4 @@
+import { publicAsset } from '../lib/site';
 import { useState } from 'react';
 import {
   BookOpen,
@@ -47,7 +48,7 @@ export function Navbar({ currentStage, onSelectStage }: NavbarProps) {
           aria-label="Về trang chủ Mầm Xanh – Ươm yêu thương, Gặt tương lai"
         >
           <img
-            src="/assets/logo-mam-xanh.png"
+            src={publicAsset('/assets/logo-mam-xanh.png')}
             alt="Logo Mầm Xanh"
             className="h-8 sm:h-10 w-auto object-contain shrink-0 drop-shadow-xs"
           />

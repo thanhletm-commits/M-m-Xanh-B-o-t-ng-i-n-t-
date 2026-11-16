@@ -1,3 +1,4 @@
+import { publicAsset } from '../lib/site';
 import { useState } from 'react';
 import {
   Camera,
@@ -73,7 +74,7 @@ const GARDEN_SIGNS: SignItem[] = [
     accentFg: '#7C3AED',
     renderBadge: () => (
       <img
-        src="/assets/aistudio/ef58baab-f5f3-4419-8132-ede530e27a38_e9890800.png"
+        src={publicAsset('/assets/aistudio/ef58baab-f5f3-4419-8132-ede530e27a38_e9890800.png')}
         alt=""
         aria-hidden="true"
         className="w-5 h-5 object-contain"
