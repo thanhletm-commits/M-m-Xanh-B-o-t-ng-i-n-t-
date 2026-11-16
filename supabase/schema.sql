@@ -16,6 +16,31 @@ create table if not exists public.students (
   created_at timestamptz not null default now()
 );
 
+create unique index if not exists students_order_number_key
+  on public.students (order_number);
+
+create or replace function public.assign_student_order_number()
+returns trigger
+language plpgsql
+set search_path = ''
+as $
+begin
+  perform pg_catalog.pg_advisory_xact_lock(618, 1);
+
+  if tg_op = 'INSERT' and new.order_number is null then
+    select coalesce(max(order_number), 0) + 1
+      into new.order_number
+      from public.students;
+  end if;
+
+  return new;
+end;
+$;
+
+create or replace trigger assign_student_order_number
+before insert or update of order_number on public.students
+for each row execute function public.assign_student_order_number();
+
 create table if not exists public.products (
   id text primary key,
   student_id text not null references public.students(id) on delete cascade,

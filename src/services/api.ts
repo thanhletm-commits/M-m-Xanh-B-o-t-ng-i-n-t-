@@ -447,10 +447,10 @@ export async function fetchAdminData(): Promise<DatabaseState> {
 export async function adminCreateStudent(payload: Partial<Student>): Promise<Student> {
   const sb = getSupabaseClient();
   if (sb) {
-    const id = `stu-${Date.now()}`;
+    const id = 'stu-' + crypto.randomUUID();
     const row = {
       id,
-      order_number: payload.orderNumber ?? 34,
+      order_number: payload.orderNumber ?? null,
       name: (payload.name || '').trim(),
       avatar_url: payload.avatarUrl ?? null,
       sprout_variant: payload.sproutVariant || 'flower_sunny',
@@ -458,6 +458,9 @@ export async function adminCreateStudent(payload: Partial<Student>): Promise<Stu
       is_demo: Boolean(payload.isDemo),
     };
     const { data, error } = await sb.from('students').insert(row).select('*').single();
+    if (error?.code === '23505' && error.message.includes('students_order_number_key')) {
+      throw new ApiError(409, 'Số thứ tự này đã có học sinh sử dụng. Hãy chọn STT khác.');
+    }
     if (error) throw new ApiError(400, error.message);
     return mapStudentRow(data as Record<string, unknown>);
   }
@@ -491,6 +494,9 @@ export async function adminUpdateStudent(
       .eq('id', id)
       .select('*')
       .single();
+    if (error?.code === '23505' && error.message.includes('students_order_number_key')) {
+      throw new ApiError(409, 'Số thứ tự này đã có học sinh sử dụng. Hãy chọn STT khác.');
+    }
     if (error) throw new ApiError(400, error.message);
     return mapStudentRow(data as Record<string, unknown>);
   }

@@ -429,9 +429,14 @@ async function startServer() {
       return;
     }
     const maxOrder = db.students.reduce((m, s) => Math.max(m, s.orderNumber), 0);
+    const orderNumber = body.orderNumber ?? maxOrder + 1;
+    if (db.students.some((student) => student.orderNumber === orderNumber)) {
+      res.status(409).json({ error: 'Số thứ tự này đã có học sinh sử dụng. Hãy chọn STT khác.' });
+      return;
+    }
     const created: Student = {
       id: `stu-${Date.now()}`,
-      orderNumber: body.orderNumber ?? maxOrder + 1,
+      orderNumber,
       name: body.name.trim(),
       avatarUrl: body.avatarUrl ?? null,
       sproutVariant: body.sproutVariant || 'flower_sunny',
@@ -452,6 +457,12 @@ async function startServer() {
     }
     const prevAvatarUrl = db.students[idx].avatarUrl;
     const patch = req.body as Partial<Student>;
+    if (patch.orderNumber !== undefined && db.students.some(
+      (student) => student.id !== req.params.id && student.orderNumber === patch.orderNumber
+    )) {
+      res.status(409).json({ error: 'Số thứ tự này đã có học sinh sử dụng. Hãy chọn STT khác.' });
+      return;
+    }
     const updated: Student = {
       ...db.students[idx],
       ...patch,

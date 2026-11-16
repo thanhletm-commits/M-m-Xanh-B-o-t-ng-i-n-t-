@@ -130,6 +130,8 @@ export function AdminPage({ onBackToSite, onDataUpdated }: AdminPageProps) {
   const [confirmDeleteAvatarStudent, setConfirmDeleteAvatarStudent] =
     useState<Student | null>(null);
   const [editingStudent, setEditingStudent] = useState<Student | null>(null);
+  const [studentEditError, setStudentEditError] = useState('');
+  const [addingStudent, setAddingStudent] = useState(false);
 
   // Products & Memories creation
   const [selectedStudentForProduct, setSelectedStudentForProduct] = useState<string>('');
@@ -921,7 +923,8 @@ export function AdminPage({ onBackToSite, onDataUpdated }: AdminPageProps) {
             <form
               onSubmit={async (e) => {
                 e.preventDefault();
-                if (!newStudentName.trim()) return;
+                if (!newStudentName.trim() || addingStudent) return;
+                setAddingStudent(true);
                 try {
                   await adminCreateStudent({
                     name: newStudentName,
@@ -935,6 +938,8 @@ export function AdminPage({ onBackToSite, onDataUpdated }: AdminPageProps) {
                   showToast('success', 'Đã thêm hồ sơ học sinh mới.');
                 } catch (err) {
                   showToast('error', (err as Error).message);
+                } finally {
+                  setAddingStudent(false);
                 }
               }}
               className="bg-white rounded-2xl border border-[#DCEAD8] p-5 grid sm:grid-cols-4 gap-3 items-end"
@@ -982,6 +987,7 @@ export function AdminPage({ onBackToSite, onDataUpdated }: AdminPageProps) {
               </div>
               <button
                 type="submit"
+                  disabled={addingStudent}
                 className="garden-btn-primary inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-white text-sm font-bold cursor-pointer"
               >
                 <Plus className="w-4 h-4" />
@@ -1080,7 +1086,10 @@ export function AdminPage({ onBackToSite, onDataUpdated }: AdminPageProps) {
 
                       <button
                         type="button"
-                        onClick={() => setEditingStudent(stu)}
+                        onClick={() => {
+                          setStudentEditError('');
+                          setEditingStudent(stu);
+                        }}
                         className="inline-flex items-center justify-center gap-1 px-2.5 py-2 rounded-xl bg-[#FFFBEB] border border-[#FDE68A] text-[#854D0E] text-xs font-bold hover:bg-[#FEF3C7] cursor-pointer"
                       >
                         <Edit3 className="w-3.5 h-3.5" />
@@ -2074,16 +2083,21 @@ export function AdminPage({ onBackToSite, onDataUpdated }: AdminPageProps) {
           <form
             onSubmit={async (e) => {
               e.preventDefault();
-              await adminUpdateStudent(editingStudent.id, {
-                name: editingStudent.name,
-                orderNumber: editingStudent.orderNumber,
-                shortIntro: editingStudent.shortIntro,
-                sproutVariant: editingStudent.sproutVariant,
-              });
-              setEditingStudent(null);
-              await loadAdmin();
-              onDataUpdated();
-              showToast('success', 'Đã lưu thông tin học sinh.');
+              setStudentEditError('');
+              try {
+                await adminUpdateStudent(editingStudent.id, {
+                  name: editingStudent.name,
+                  orderNumber: editingStudent.orderNumber,
+                  shortIntro: editingStudent.shortIntro,
+                  sproutVariant: editingStudent.sproutVariant,
+                });
+                setEditingStudent(null);
+                await loadAdmin();
+                onDataUpdated();
+                showToast('success', 'Đã lưu thông tin học sinh.');
+              } catch (err) {
+                setStudentEditError(err instanceof Error ? err.message : 'Không thể lưu thông tin học sinh.');
+              }
             }}
             onClick={(e) => e.stopPropagation()}
             className="w-full max-w-md rounded-3xl bg-white border-2 border-[#D4ECCF] p-6 shadow-2xl space-y-4"
@@ -2115,6 +2129,11 @@ export function AdminPage({ onBackToSite, onDataUpdated }: AdminPageProps) {
               />
             </div>
 
+            {studentEditError && (
+              <p id="student-edit-error" role="alert" className="text-sm font-semibold text-red-700">
+                {studentEditError}
+              </p>
+            )}
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-bold text-[#496449] mb-1">Số thứ tự</label>
@@ -2122,13 +2141,16 @@ export function AdminPage({ onBackToSite, onDataUpdated }: AdminPageProps) {
                   type="number"
                   min={1}
                   required
-                  value={editingStudent.orderNumber}
-                  onChange={(e) =>
+                  value={editingStudent.orderNumber || ''}
+                  aria-invalid={Boolean(studentEditError)}
+                  aria-describedby={studentEditError ? 'student-edit-error' : undefined}
+                  onChange={(e) => {
+                    setStudentEditError('');
                     setEditingStudent({
                       ...editingStudent,
-                      orderNumber: Number(e.target.value) || 1,
-                    })
-                  }
+                      orderNumber: Number(e.target.value),
+                    });
+                  }}
                   className="w-full px-3 py-2 rounded-xl border border-[#CFE4CB] text-sm font-bold tabular-nums"
                 />
               </div>
