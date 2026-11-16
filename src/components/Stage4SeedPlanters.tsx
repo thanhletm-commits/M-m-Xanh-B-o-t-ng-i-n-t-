@@ -3,17 +3,8 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ArrowLeft,
   ArrowRight,
-  Award,
-  BookOpen,
-  Calculator,
-  Globe,
   Heart,
-  Leaf,
-  Music,
-  Palette,
   Pause,
-  Send,
-  Trophy,
   Volume2,
   X,
 } from 'lucide-react';
@@ -30,29 +21,6 @@ interface Stage4Props {
   onTeacherAudioStop?: () => void;
   onPrev: () => void;
   onNext: () => void;
-}
-
-function getTeacherIcon(subjectKey: Teacher['subjectKey']) {
-  switch (subjectKey) {
-    case 'homeroom':
-      return Heart;
-    case 'reading':
-      return BookOpen;
-    case 'ethics':
-      return Award;
-    case 'english':
-      return Globe;
-    case 'science':
-      return Leaf;
-    case 'math':
-      return Calculator;
-    case 'music':
-      return Music;
-    case 'art':
-      return Palette;
-    case 'pe':
-      return Trophy;
-  }
 }
 
 function formatAudioTime(seconds: number): string {
@@ -73,6 +41,7 @@ export function Stage4SeedPlanters({
   onNext,
 }: Stage4Props) {
   const [openTeacher, setOpenTeacher] = useState<Teacher | null>(null);
+  const activeEnvelope = useRef<HTMLButtonElement | null>(null);
   const [selectedHeartWish, setSelectedHeartWish] = useState<WishMessage | null>(null);
   const [treeTeacherFilter, setTreeTeacherFilter] = useState<string>('all');
   const [wishFormExpanded, setWishFormExpanded] = useState(true);
@@ -103,8 +72,7 @@ export function Stage4SeedPlanters({
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        stopTeacherAudio();
-        setOpenTeacher(null);
+        handleCloseTeacherModal();
         setSelectedHeartWish(null);
       }
     };
@@ -154,12 +122,8 @@ export function Stage4SeedPlanters({
   const handleCloseTeacherModal = () => {
     stopTeacherAudio();
     setOpenTeacher(null);
-  };
-
-  const handleOpenWishFromEnvelope = () => {
-    stopTeacherAudio();
-    setOpenTeacher(null);
-    onOpenWishModal?.();
+    activeEnvelope.current?.focus({ preventScroll: true });
+    activeEnvelope.current = null;
   };
 
   const handleToggleTeacherAudio = async () => {
@@ -208,90 +172,30 @@ export function Stage4SeedPlanters({
           </p>
         </div>
 
-        {/* 9 Teacher Envelopes Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
-          {teachers.map((teacher) => {
-            const Icon = getTeacherIcon(teacher.subjectKey);
-            return (
-              <button
-                key={teacher.id}
-                type="button"
-                onClick={() => {
-                  stopTeacherAudio();
-                  setOpenTeacher(teacher);
-                }}
-                aria-label={`Mở phong thư gửi ${teacher.name}`}
-                className="group relative text-left rounded-[28px] bg-[#FFFDF8] border-2 border-[#EADCC4] p-5 sm:p-6 shadow-[0_14px_30px_-10px_rgba(95,70,35,0.18)] hover:-translate-y-1.5 hover:border-[#74C947] transition-all duration-200 cursor-pointer overflow-hidden"
-              >
-                <div
-                  className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#FAF0DC] to-transparent pointer-events-none"
-                  aria-hidden="true"
-                />
-
-                <div className="relative flex items-start justify-between gap-3 mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-20 h-14 rounded-2xl bg-white border border-[#EADBC0] shadow-sm p-1 flex items-center justify-center shrink-0 overflow-hidden transition-transform duration-200 group-hover:scale-105 group-hover:-rotate-2">
-                      <img
-                        src={publicAsset('/assets/aistudio/Whimsical_Airmail_Envelope_with_Flowers_and_Books_41920d7f.png')}
-                        alt=""
-                        aria-hidden="true"
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-
-                    <div
-                      className="w-9 h-9 rounded-xl flex items-center justify-center shadow-xs shrink-0"
-                      style={{
-                        backgroundColor: `${teacher.accentColor}20`,
-                        color: teacher.accentColor,
-                      }}
-                    >
-                      <Icon className="w-4 h-4" aria-hidden="true" />
-                    </div>
-                  </div>
-
-                  {/* Heart Wax Seal + optional audio indicator */}
-                  <div className="flex items-center gap-1.5 shrink-0">
-                    {teacher.audioUrl && (
-                      <span
-                        title="Phong thư có bản ghi âm lời chúc"
-                        className="w-8 h-8 rounded-full bg-[#EEF9EA] border border-[#BDE4B3] text-[#2B6E24] flex items-center justify-center shadow-xs"
-                        aria-label="Có âm thanh"
-                      >
-                        <Volume2 className="w-3.5 h-3.5" aria-hidden="true" />
-                      </span>
-                    )}
-                    <span
-                      className="w-9 h-9 rounded-full bg-gradient-to-b from-[#FB7185] to-[#E11D48] text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform shrink-0"
-                      aria-hidden="true"
-                    >
-                      <Heart className="w-4 h-4 fill-current" />
-                    </span>
-                  </div>
-                </div>
-
-                <h3 className="font-display font-extrabold text-lg text-[#21521D] leading-snug">
-                  {teacher.name}
-                </h3>
-                <p className="mt-1 text-xs sm:text-sm font-semibold text-[#647864]">
-                  {teacher.role}
-                </p>
-
-                <div className="mt-4 pt-3 border-t border-[#F0E8D6] flex items-center justify-between text-xs font-bold text-[#4E9F3D]">
-                  <span className="inline-flex items-center gap-2">
-                    <img
-                      src={publicAsset('/assets/aistudio/Whimsical_Airmail_Envelope_with_Flowers_and_Books_41920d7f.png')}
-                      alt=""
-                      aria-hidden="true"
-                      className="w-5 h-3.5 object-contain shrink-0"
-                    />
-                    <span>Mở phong thư tri ân</span>
-                  </span>
-                  <span className="text-[#8B6A44] tabular-nums">#{teacher.orderNumber}</span>
-                </div>
-              </button>
-            );
-          })}
+        <div className="teacher-envelope-grid mb-14">
+          {teachers.map((teacher) => (
+            <button
+              key={teacher.id}
+              type="button"
+              className="teacher-envelope"
+              aria-label={"Mở phong thư gửi " + teacher.name}
+              onClick={(event) => {
+                activeEnvelope.current = event.currentTarget;
+                stopTeacherAudio();
+                setOpenTeacher(teacher);
+              }}
+            >
+              <img
+                src={publicAsset('/assets/phong-thu-goc.webp')}
+                alt=""
+                width={420}
+                height={280}
+                loading="lazy"
+              />
+              <b>{teacher.name}</b>
+              <small>{teacher.role}</small>
+            </button>
+          ))}
         </div>
 
         {/* Cây Tri Ân (Interactive Tree of Gratitude with 3D Pastel/Peach Hearts) */}
@@ -471,7 +375,7 @@ export function Stage4SeedPlanters({
       <AnimatePresence>
         {openTeacher && (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#193319]/50 backdrop-blur-xs overflow-y-auto"
+            className="fixed inset-0 z-[60] grid place-items-center bg-[#2b1a3699] p-3"
             onClick={handleCloseTeacherModal}
             role="dialog"
             aria-modal="true"
@@ -482,53 +386,23 @@ export function Stage4SeedPlanters({
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.94, y: 12 }}
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-xl rounded-[32px] bg-[#FFFDF8] border-2 border-[#E5D7B9] shadow-2xl overflow-hidden my-auto"
+              className="teacher-letter-dialog"
             >
-              <div className="flex items-center justify-between gap-3 px-6 py-4 bg-[#FAF1DF] border-b border-[#EADBC0]">
-                <div className="flex items-center gap-3 min-w-0">
-                  {openTeacher.avatarUrl ? (
-                    <img
-                      src={openTeacher.avatarUrl}
-                      alt={openTeacher.name}
-                      className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-xs shrink-0"
-                    />
-                  ) : (
-                    <div
-                      className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shrink-0 shadow-sm"
-                      style={{ backgroundColor: openTeacher.accentColor }}
-                    >
-                      <Heart className="w-5 h-5 fill-current" aria-hidden="true" />
-                    </div>
-                  )}
-                  <div className="min-w-0">
-                    <h2
-                      id="teacher-letter-title"
-                      className="font-display font-extrabold text-lg text-[#21521D] truncate"
-                    >
-                      {openTeacher.name}
-                    </h2>
-                    <p className="text-xs font-semibold text-[#6B5A42]">{openTeacher.role}</p>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={handleCloseTeacherModal}
-                  aria-label="Đóng phong thư"
-                  className="p-2 rounded-xl bg-white border border-[#E4D5B7] text-[#4E3E2A] cursor-pointer"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              <div className="p-6 sm:p-8 space-y-5">
-                <div>
-                  <h3 className="font-display font-extrabold text-xl text-[#8A4F14] mb-3">
-                    {openTeacher.letterTitle}
-                  </h3>
-                  <p className="text-base leading-[1.78] text-[#2F3E31] bg-white rounded-2xl p-5 border border-[#EFE6D2]">
-                    {openTeacher.letterContent}
-                  </p>
-                </div>
+              <button
+                type="button"
+                onClick={handleCloseTeacherModal}
+                className="teacher-letter-close"
+                autoFocus
+              >
+                ✕ Đóng
+              </button>
+              <div className="clear-both space-y-2">
+                <h3 id="teacher-letter-title" className="text-lg font-extrabold">
+                  💌 {openTeacher.name}
+                </h3>
+                <p className="text-sm">{openTeacher.role}</p>
+                {openTeacher.letterTitle && <h4 className="font-bold">{openTeacher.letterTitle}</h4>}
+                <div className="teacher-letter-text">{openTeacher.letterContent}</div>
 
                 {/* Per-Letter NGHE Audio Player (Never Auto-Plays) */}
                 {openTeacher.audioUrl ? (
@@ -601,34 +475,7 @@ export function Stage4SeedPlanters({
                       <p className="text-xs font-semibold text-red-700">{letterAudioError}</p>
                     )}
                   </div>
-                ) : (
-                  <div className="rounded-2xl bg-[#FAF6EC] border border-[#EADEC4] px-4 py-3 flex items-center gap-2.5 text-xs font-semibold text-[#6F5C42]">
-                    <Volume2 className="w-4 h-4 shrink-0 text-[#9B825E]" aria-hidden="true" />
-                    <span>
-                      Phong thư này chưa gắn file ghi âm. Giáo viên có thể tải bản ghi âm (MP3, M4A, WAV) tại mục Quản lý 9 thầy cô.
-                    </span>
-                  </div>
-                )}
-
-                <div className="flex flex-wrap items-center justify-end gap-3 pt-1">
-                  <button
-                    type="button"
-                    onClick={handleCloseTeacherModal}
-                    className="px-5 py-3 rounded-2xl bg-white border border-[#E4D5B7] text-[#4E3E2A] font-bold text-sm hover:bg-[#FAF4E8] cursor-pointer"
-                  >
-                    ĐÓNG
-                  </button>
-                  {onOpenWishModal && (
-                    <button
-                      type="button"
-                      onClick={handleOpenWishFromEnvelope}
-                      className="garden-btn-sunny inline-flex items-center gap-2 px-5 py-3 rounded-2xl text-[#4A2C00] font-display font-extrabold text-sm cursor-pointer"
-                    >
-                      <Send className="w-4 h-4" aria-hidden="true" />
-                      <span>GỬI LỜI TRI ÂN</span>
-                    </button>
-                  )}
-                </div>
+                ) : null}
               </div>
             </motion.div>
           </div>
