@@ -14,11 +14,7 @@ export function StageHome({ coverImageUrl, onExplore }: StageHomeProps) {
     <section
       id="home"
       aria-label="Trang chủ – Bìa báo Mầm Xanh"
-      className={
-        coverImageUrl
-          ? "relative flex min-h-[100svh] w-full items-end justify-center overflow-hidden select-none"
-          : "relative flex w-full flex-col overflow-hidden bg-[#E9F6DB] select-none md:min-h-[100svh] md:justify-end"
-      }
+      className="flex w-full flex-col bg-[#E9F6DB] pt-14 select-none sm:pt-16"
     >
       <h1 className="sr-only">
         Mầm Xanh – Ươm yêu thương, Gặt tương lai – Báo tường điện tử chào mừng Ngày Nhà giáo Việt Nam 20/11 – Lớp 1/8 Trường Tiểu học Huỳnh Ngọc Huệ
@@ -28,9 +24,9 @@ export function StageHome({ coverImageUrl, onExplore }: StageHomeProps) {
         alt=""
         src={coverSrc}
         fetchPriority="high"
-        className={coverImageUrl
-          ? "absolute inset-0 h-full w-full object-cover"
-          : "aspect-[1672/941] h-auto w-full object-contain md:absolute md:inset-0 md:h-full md:object-cover"}
+        width={coverImageUrl ? undefined : 1672}
+        height={coverImageUrl ? undefined : 941}
+        className="block h-auto w-full object-contain md:max-h-[max(12rem,calc(100svh-9rem))]"
       />
 
       {/* Single Interactive Primary CTA Button at Bottom */}
@@ -38,11 +34,7 @@ export function StageHome({ coverImageUrl, onExplore }: StageHomeProps) {
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className={
-          coverImageUrl
-            ? "relative z-10 flex w-full justify-start pr-28 pb-4 pl-4 sm:justify-center sm:px-4 sm:pb-7 md:pb-8"
-            : "relative z-10 flex w-full justify-center px-4 py-4 md:pt-0 md:pb-8"
-        }
+        className="relative z-10 flex w-full justify-center px-4 py-4"
       >
         <button
           type="button"
