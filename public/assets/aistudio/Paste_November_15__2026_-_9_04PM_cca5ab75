@@ -1,0 +1,821 @@
+MASTER PROMPT TỔNG THỂ – WEBSITE BÁO TƯỜNG ĐIỆN TỬ MẦM XANH
+ƯƠM YÊU THƯƠNG – GẶT TƯƠNG LAI
+PHIÊN BẢN HOÀN CHỈNH – CẬP NHẬT TẤT CẢ YÊU CẦU
+Bạn là chuyên gia thiết kế UI/UX, phát triển website giáo dục, lập trình frontend/backend, cơ sở dữ liệu và thiết kế trải nghiệm tương tác dành cho học sinh tiểu học.
+Hãy kiểm tra, hoàn thiện và phát triển trực tiếp dự án website MẦM XANH hiện có trong Google AI Studio theo toàn bộ yêu cầu dưới đây.
+ĐÂY LÀ DỰ ÁN ĐANG ĐƯỢC PHÁT TRIỂN. KHÔNG TẠO WEBSITE MỚI TỪ ĐẦU. KHÔNG XÓA, KHÔNG LÀM MẤT DỮ LIỆU, HÌNH ẢNH, CHỨC NĂNG VÀ NHỮNG PHẦN ĐÃ ĐƯỢC HOÀN THIỆN.
+Trước khi sửa bất cứ nội dung nào, phải kiểm tra cấu trúc dự án hiện tại.
+________________________________________
+I. THÔNG TIN CHUNG VÀ Ý TƯỞNG CHỦ ĐẠO
+•	Tên website: MẦM XANH.
+•	Slogan: Ươm yêu thương – Gặt tương lai.
+•	Đơn vị: Tập thể lớp 1/8 – Trường Tiểu học Huỳnh Ngọc Huệ.
+•	Chủ đề: Chào mừng Ngày Nhà giáo Việt Nam 20/11.
+•	Đối tượng: Học sinh, giáo viên, phụ huynh và khách tham quan.
+Ý tưởng chủ đạo:
+MẦM XANH là một khu vườn yêu thương, nơi mỗi học sinh là một mầm xanh, mỗi sản phẩm là một món quà, mỗi lời tri ân là một trái tim và thầy cô là những người gieo mầm tri thức.
+Website dẫn dắt người xem qua một hành trình cảm xúc: từ những hạt mầm đầu tiên, khu vườn yêu thương, những miền ký ức, lời tri ân, trò chơi khám phá đến khúc kết hướng về tương lai.
+Mục tiêu là xây dựng một báo tường điện tử sinh động, giàu cảm xúc, có tính tương tác và có thể lưu giữ lâu dài.
+II. PHONG CÁCH THIẾT KẾ VÀ BỘ NHẬN DIỆN
+1. Phong cách chung
+•	3D cartoon, chibi, hoạt hình đáng yêu.
+•	Chất liệu bóng mịn, bo tròn, có chiều sâu.
+•	Không gian khu vườn cổ tích.
+•	Màu chủ đạo: xanh non, vàng nắng, hồng đào, kem sữa và xanh trời.
+•	Ánh sáng dịu, tươi sáng, ấm áp.
+•	Thiết kế thân thiện với học sinh lớp 1 nhưng vẫn trang trọng và giàu cảm xúc.
+2. Bộ tài sản hình ảnh
+Sử dụng các hình ảnh đã được giáo viên chuẩn bị và tạo trong quá trình xây dựng MẦM XANH.
+Các tài sản gồm:
+Nhóm nhận diện:
+•	Logo MẦM XANH.
+•	Mascot Bé Mầm Xanh.
+•	Icon trò chơi 3D.
+Nhóm banner:
+1.	Hạt mầm đầu tiên.
+2.	Vườn yêu thương.
+3.	Dưới tán xanh.
+4.	Người gieo mầm.
+5.	Đố vui 20/11.
+6.	Vươn mình đón nắng.
+Nhóm background:
+1.	Background Hạt mầm đầu tiên.
+2.	Background Vườn yêu thương.
+3.	Background Dưới tán xanh.
+4.	Background Người gieo mầm.
+5.	Background Đố vui 20/11.
+6.	Background Vươn mình đón nắng.
+Nhóm hình ảnh tương tác:
+•	Bộ nút bấm 3D.
+•	Phong thư tri ân.
+•	Biểu tượng Cây Tri Ân.
+•	Hoa, lá, cánh hoa, sách và các vật trang trí.
+Quy định:
+•	Ưu tiên sử dụng đúng file hình ảnh gốc do giáo viên cung cấp.
+•	Không tự ý tạo lại những tài sản đã có.
+•	Không dùng một ảnh collage làm toàn bộ giao diện.
+•	Từng tài sản phải được sử dụng đúng vị trí và đúng chức năng.
+•	Icon và nhân vật trang trí ưu tiên PNG nền trong suốt.
+•	Background sử dụng tỷ lệ phù hợp với từng khu vực.
+•	Không để AI tạo chữ tiếng Việt trực tiếp trong các hình ảnh mới nếu có nguy cơ sai dấu.
+•	Các tiêu đề và nội dung cần thiết phải hiển thị bằng văn bản thật trên website.
+3. Mascot Bé Mầm Xanh
+Nhân vật là một mầm cây có khuôn mặt, không phải em bé hóa trang thành cây.
+Đặc điểm:
+•	Thân nhỏ tròn màu xanh non.
+•	Hai chiếc lá lớn trên đầu.
+•	Mặt màu kem.
+•	Mắt nâu to, mũi nhỏ, miệng cười, má hồng.
+•	Bông hoa vàng bên đầu.
+•	Cặp sách vàng cam.
+•	Tay chân nhỏ.
+•	Giày xanh có hoa trắng.
+•	Phong cách 3D cartoon bóng mịn.
+Giữ nhất quán hình dáng và đặc điểm nhận diện trong toàn bộ website.
+Có thể sử dụng nhiều tư thế: vẫy tay, chỉ dẫn, cầm trái tim, cầm sách, cổ vũ và tạm biệt.
+III. CẤU TRÚC WEBSITE – ĐÚNG 6 CHẶNG
+Website sử dụng mô hình Single Page Scrolling.
+Toàn bộ nội dung công khai nằm trên một trang dài, người xem cuộn từ trên xuống hoặc nhấn thanh điều hướng để đến từng chặng. Không tải lại trang khi chuyển chặng.
+Cấu trúc bắt buộc:
+TRANG BÌA – MẦM XANH
+CHẶNG 1. HẠT MẦM ĐẦU TIÊN – Lời ngỏ.
+CHẶNG 2. VƯỜN YÊU THƯƠNG – 33 học sinh và sản phẩm tri ân.
+CHẶNG 3. DƯỚI TÁN XANH – Những miền ký ức tuổi thơ.
+CHẶNG 4. NGƯỜI GIEO MẦM – Phong thư và Cây Tri Ân.
+CHẶNG 5. ĐỐ VUI 20/11 – Cùng bé khám phá.
+CHẶNG 6. VƯƠN MÌNH ĐÓN NẮNG – Lời cảm ơn và khúc kết.
+Quy định:
+•	Có đúng 6 chặng.
+•	Đố vui là một chặng độc lập.
+•	Đố vui nằm sau Người gieo mầm và trước Vươn mình đón nắng.
+•	Vươn mình đón nắng luôn là chặng cuối.
+•	Không tự ý thêm chặng chính.
+•	Không tạo khu vực phụ rời rạc như rạp chiếu, góc sáng tạo hoặc kho trò chơi riêng.
+IV. TRANG CHỦ – ẢNH BÌA FULL MÀN HÌNH
+Đây là yêu cầu quan trọng.
+Sử dụng đúng ảnh bìa MẦM XANH mà giáo viên đã tải lên và chuẩn bị.
+Không hiển thị ảnh bìa dưới dạng một thẻ ảnh nhỏ nằm giữa trang.
+1. Cách hiển thị
+•	Ảnh bìa phủ toàn bộ chiều rộng màn hình.
+•	Chiếm toàn bộ chiều cao màn hình đầu tiên.
+•	Không có khung trắng xung quanh.
+•	Không bo góc ảnh thành một thẻ nhỏ.
+•	Không giới hạn max-width.
+•	Không để khoảng trắng thừa ở hai bên hoặc phía dưới.
+•	Không kéo méo hình ảnh.
+•	Giữ nguyên nhân vật, chữ và bố cục của ảnh gốc.
+Có thể sử dụng background-size: cover hoặc kỹ thuật tương đương.
+Cấu hình hiển thị:
+•	width: 100%.
+•	min-height: 100vh hoặc 100svh.
+•	background-repeat: no-repeat.
+•	background-position phù hợp.
+•	Không có margin mặc định của body tạo viền trắng.
+2. Nội dung trang chủ
+Ảnh bìa đã có đầy đủ:
+•	MẦM XANH.
+•	Slogan.
+•	Thông tin lớp và trường.
+•	Chủ đề 20/11.
+•	Hình ảnh thầy cô và học sinh.
+Vì vậy, không tạo thêm tiêu đề, slogan, dòng thông tin lớp hoặc nội dung lặp lại phía dưới ảnh bìa.
+Chỉ giữ một nút:
+KHÁM PHÁ BÁO TƯỜNG →
+Thiết kế:
+•	Màu xanh lá.
+•	Chữ trắng.
+•	Nút 3D bo tròn.
+•	Có hiệu ứng nổi nhẹ.
+•	Đặt ở chính giữa phía dưới, không che nội dung quan trọng trên ảnh.
+Khi nhấn, cuộn mượt đến Chặng 1 – Hạt mầm đầu tiên.
+Không thêm nút khám phá thứ hai.
+3. Responsive
+Trên máy tính:
+•	Ảnh phủ kín vùng hiển thị đầu tiên.
+Trên điện thoại:
+•	Giữ được các nội dung quan trọng của ảnh.
+•	Không cắt mất tiêu đề và nhân vật chính.
+•	Có thể sử dụng ảnh phiên bản mobile nếu cần.
+•	Không kéo méo ảnh để ép vừa màn hình.
+Không tạo lại ảnh bìa nếu đã có file gốc.
+V. HỆ THỐNG ĐIỀU HƯỚNG
+1. Thanh ngang
+Thiết kế thanh điều hướng ngang cố định hoặc sticky phía trên khi người xem cuộn vào các chặng nội dung.
+Có:
+•	Logo MẦM XANH.
+•	Slogan.
+•	Trang chủ.
+•	Hạt mầm đầu tiên.
+•	Vườn yêu thương.
+•	Dưới tán xanh.
+•	Người gieo mầm.
+•	Đố vui 20/11.
+•	Vươn mình đón nắng.
+•	Nút NHẠC NỀN.
+•	Nút GỬI LỜI CHÚC.
+Hai nút NHẠC NỀN và GỬI LỜI CHÚC đặt cạnh nhau ở phía bên phải.
+Nút GỬI LỜI CHÚC mở biểu mẫu học sinh gửi lời tri ân.
+Nút NHẠC NỀN có bật/tắt và điều chỉnh âm lượng.
+2. Thanh điều hướng dọc
+Có đúng 6 mục tương ứng với 6 chặng.
+Mỗi mục có icon 3D riêng.
+Khi nhấn, website cuộn mượt đến đúng khu vực.
+Chặng đang xem được làm nổi bật.
+3. Responsive
+Máy tính:
+•	Thanh ngang phía trên.
+•	Thanh dọc bên trái.
+•	Nội dung chính ở giữa và bên phải.
+Điện thoại:
+•	Thanh ngang thu gọn.
+•	Thanh dọc thành menu mở rộng khi cần.
+•	Nội dung một cột.
+•	Không tràn ngang.
+•	Không để menu che nội dung.
+VI. CHẶNG 1 – HẠT MẦM ĐẦU TIÊN
+Thiết kế như một trang thư viết tay, sử dụng background Hạt mầm đầu tiên đã chuẩn bị.
+Hình ảnh:
+•	Hạt giống.
+•	Mầm cây vừa nhú.
+•	Quyển thư.
+•	Hoa nhỏ.
+•	Bút viết.
+Nội dung lời ngỏ:
+"Có những hạt mầm được gieo xuống từ đất mẹ, lớn lên nhờ nắng ấm và những giọt mưa lành. Cũng có những hạt mầm được gieo từ tình yêu thương, từ sự tận tụy và những bài học đầu tiên của thầy cô.
+Trong hành trình trưởng thành của mỗi chúng em, thầy cô chính là những người lặng lẽ vun trồng, chăm sóc và chắp cánh cho những ước mơ.
+Nhân ngày Nhà giáo Việt Nam 20/11, chúng em xin gửi đến thầy cô những tình cảm yêu thương và lòng biết ơn chân thành nhất.
+Báo tường điện tử MẦM XANH là món quà nhỏ được kết nên từ những bức tranh, tấm thiệp, lời chúc và những kỷ niệm đáng nhớ của tập thể lớp 1/8.
+Mỗi sản phẩm là một hạt mầm yêu thương. Mỗi lời chúc là một bông hoa đẹp. Tất cả cùng tạo nên khu vườn tri ân dành tặng những người đã tận tâm gieo mầm tri thức.
+Chúng em yêu thương và kính tặng thầy cô!
+Tập thể học sinh lớp 1/8."
+VII. CHẶNG 2 – VƯỜN YÊU THƯƠNG
+Có 33 học sinh.
+Mỗi học sinh có:
+•	Một ảnh đại diện PNG hoàn chỉnh do giáo viên chuẩn bị.
+•	Tên học sinh.
+•	Một hoặc nhiều sản phẩm tri ân.
+1. Sử dụng 33 ảnh PNG có sẵn
+Tôi đã chuẩn bị sẵn 33 ảnh học sinh hoàn chỉnh. Mỗi ảnh đã có khuôn mặt thật được ghép vào nhân vật mầm cây.
+Phải sử dụng trực tiếp 33 ảnh PNG gốc.
+Không:
+•	Tạo lại nhân vật bằng AI.
+•	Ghép lại khuôn mặt.
+•	Thay đổi khuôn mặt.
+•	Chỉnh sửa đặc điểm nhận diện.
+•	Thay thế bằng icon hoặc avatar mặc định.
+•	Cắt mất khuôn mặt.
+•	Kéo giãn hoặc bóp méo ảnh.
+Mỗi học sinh tương ứng một ảnh riêng.
+2. Bố trí
+•	Hiển thị đủ 33 nhân vật.
+•	Bố trí thành khu vườn sinh động.
+•	Ảnh đồng đều, cân đối.
+•	Tên học sinh hiển thị rõ ràng.
+•	Không chồng lấn.
+•	Không che khuất nhân vật.
+3. Tương tác
+Khi nhấn một nhân vật:
+•	Mở cửa sổ thông tin học sinh.
+•	Hiển thị tên học sinh.
+•	Hiển thị sản phẩm của học sinh.
+•	Cho phép xem tranh, thiệp, lời chúc và video.
+•	Có thể phóng to ảnh.
+•	Có nút đóng.
+Mỗi học sinh có thể có nhiều sản phẩm.
+Dữ liệu lấy từ Supabase.
+VIII. CHẶNG 3 – DƯỚI TÁN XANH
+Sử dụng background Dưới tán xanh đã chuẩn bị.
+Đây là album ảnh kỷ niệm.
+Nội dung:
+•	Ảnh thầy cô.
+•	Ảnh tập thể.
+•	Ảnh hoạt động học tập.
+•	Ảnh giờ ra chơi.
+•	Ảnh ngoại khóa.
+•	Những khoảnh khắc đáng nhớ.
+Thiết kế:
+•	Khung ảnh 3D.
+•	Dây treo ảnh dưới tán cây.
+•	Album ảnh.
+•	Chú thích ngắn.
+•	Nhấn ảnh để phóng to.
+•	Có nút xem ảnh trước và ảnh tiếp theo.
+Không sử dụng 33 nhân vật mầm cây trong khu vực này.
+IX. CHẶNG 4 – NGƯỜI GIEO MẦM
+Sử dụng background Người gieo mầm đã chuẩn bị.
+Chặng này gồm hai phần riêng biệt:
+1.	Chín phong thư tri ân dành cho 9 giáo viên.
+2.	Cây Tri Ân lưu giữ những lời nhắn bổ sung do học sinh gửi.
+Không gộp hai nhóm dữ liệu hoặc chức năng này.
+A. CHÍN PHONG THƯ TRI ÂN
+Có đúng 9 phong thư dành cho 9 giáo viên:
+1.	Cô giáo Lê Thị Minh Thanh – GVCN lớp 1/8.
+2.	Cô giáo Phạm Thị Khanh – Giảng dạy môn Văn hóa đọc.
+3.	Thầy Ngô Xuân Chung – Giảng dạy môn Đạo đức.
+4.	Cô Vũ Thị Ngọc Bích – Giáo viên Tiếng Anh.
+5.	Cô Trần Kim Ngân – Giáo viên Tự nhiên xã hội.
+6.	Cô Diệp Lệ Trúc Mai – Giáo viên Toán tăng cường.
+7.	Cô Hồ Lê Thi – Giáo viên Âm nhạc.
+8.	Cô Trần Thị Thu Thảo – Giáo viên Mĩ thuật.
+9.	Thầy Nguyễn Thái Học – Giáo viên Thể dục.
+Thiết kế:
+•	Sử dụng hình ảnh phong thư 3D đã chuẩn bị.
+•	Không có chữ cố định trên phong thư.
+•	Tên giáo viên hiển thị bằng văn bản thật bên dưới hoặc bên cạnh phong thư.
+•	Bố trí 9 phong thư đẹp, cân đối.
+•	Khi nhấn, mở phong thư và hiển thị nội dung tri ân.
+1. Nội dung văn bản trong từng phong thư
+Mỗi phong thư phải có lời chúc/lời tri ân bằng văn bản.
+Giữ nguyên nội dung lời chúc đã được giáo viên chuẩn bị trong dự án hiện tại.
+Không xóa hoặc thay thế văn bản bằng âm thanh.
+Người xem mở phong thư phải đọc được nội dung lời chúc.
+2. Bổ sung nút NGHE
+Mỗi phong thư có một file âm thanh riêng tương ứng với lời chúc bằng văn bản của phong thư đó.
+Nút NGHE là chức năng bổ sung cho văn bản, không thay thế văn bản.
+Yêu cầu:
+•	Hiển thị nút NGHE kèm biểu tượng loa.
+•	Khi nhấn, phát file âm thanh tương ứng với phong thư.
+•	Có thể tạm dừng và phát tiếp.
+•	Có thanh tiến trình hoặc thời lượng nếu phù hợp.
+•	Không tự động phát khi mở phong thư.
+•	Không phát đồng thời nhiều file.
+•	Khi đóng phong thư hoặc chuyển sang phong thư khác, dừng âm thanh đang phát.
+•	Không dùng giọng đọc AI thay thế giọng nói thật nếu giáo viên đã cung cấp file ghi âm.
+3. Quản lý âm thanh 9 phong thư
+Trong trang quản trị:
+•	Có đúng 9 vị trí quản lý âm thanh.
+•	Mỗi vị trí gắn với một giáo viên.
+•	Cho phép tải file âm thanh.
+•	Cho phép nghe thử.
+•	Cho phép thay thế file.
+•	Cho phép xóa file.
+•	Hiển thị trạng thái đã có âm thanh hoặc chưa có âm thanh.
+Hỗ trợ MP3, M4A và WAV.
+Lưu âm thanh trong Supabase Storage.
+Đường dẫn âm thanh phải gắn chính xác với phong thư tương ứng.
+Không gắn nhầm file âm thanh giữa các giáo viên.
+B. CÂY TRI ÂN
+Sử dụng biểu tượng Cây Tri Ân đã chuẩn bị.
+Cây gốc:
+•	Tán lá xanh non rộng.
+•	Thân cây màu nâu.
+•	Hoa trắng nhỏ.
+•	Nơ hồng.
+•	Bảng tên CÂY TRI ÂN.
+•	Hoa hướng dương, sách và quà trang trí dưới gốc.
+Hình ảnh cây gốc không có trái tim treo sẵn.
+Các trái tim là thành phần đồ họa động do website tạo dựa trên dữ liệu lời tri ân đã được duyệt.
+1. Cơ chế tạo trái tim
+Mỗi lời tri ân bổ sung sau khi giáo viên duyệt sẽ tự động xuất hiện thành một trái tim nhỏ trên tán cây.
+•	Mỗi lời tri ân được duyệt tương ứng với một trái tim.
+•	Số lượng trái tim tăng theo số lời tri ân được duyệt.
+•	Trái tim được bố trí tự nhiên, hài hòa trên tán cây.
+•	Không che khuất nhau.
+•	Có thể sử dụng màu hồng đào, hồng phấn và hiệu ứng 3D.
+•	Không hiển thị trái tim cho nội dung đang chờ duyệt hoặc bị từ chối.
+2. Khi nhấn vào trái tim
+Hiển thị cửa sổ nội dung gồm:
+•	Tên học sinh gửi.
+•	Tên thầy cô nhận lời tri ân.
+•	Nội dung lời nhắn.
+•	Ảnh thiệp nếu có.
+Có nút đóng.
+Mỗi trái tim phải liên kết chính xác với một bản ghi lời tri ân trong Supabase.
+Khi có lời tri ân mới được duyệt, cây tự động cập nhật thêm trái tim mà không cần giáo viên chỉnh sửa hình ảnh thủ công.
+C. BIỂU MẪU HỌC SINH GỬI LỜI TRI ÂN
+Chỉ học sinh gửi lời tri ân đến giáo viên.
+Không có chức năng giáo viên gửi lời chúc cho học sinh.
+Biểu mẫu gồm đúng các trường:
+1. Tên học sinh
+•	Ô nhập văn bản tự do.
+•	Học sinh tự nhập tên.
+•	Không dùng danh sách chọn.
+•	Không tự động điền.
+2. Tên thầy/cô muốn gửi lời tri ân
+•	Ô nhập văn bản tự do.
+•	Học sinh tự nhập tên thầy cô.
+•	Không dùng danh sách chọn.
+•	Không tự động điền.
+•	Không tự động lấy tên giáo viên từ phong thư đang mở.
+3. Nội dung lời tri ân
+•	Ô nhập nhiều dòng.
+•	Gợi ý: "Em hãy viết những lời yêu thương muốn gửi đến thầy cô nhé!"
+4. Ảnh thiệp đính kèm
+•	Không bắt buộc.
+•	Cho phép tải ảnh thiệp.
+Có hai nút:
+•	GỬI LỜI TRI ÂN.
+•	ĐÓNG.
+Không yêu cầu đăng nhập.
+Sau khi gửi:
+•	Lưu vào Supabase.
+•	Trạng thái ban đầu CHỜ DUYỆT.
+•	Chỉ hiển thị thông báo thành công sau khi lưu thành công.
+•	Giáo viên có thể duyệt hoặc từ chối trong trang quản trị.
+•	Chỉ nội dung được duyệt mới hiển thị công khai và tạo trái tim trên cây.
+QUY ĐỊNH QUAN TRỌNG:
+Các lời nhắn bổ sung này chỉ có văn bản và ảnh thiệp tùy chọn.
+Không có file âm thanh.
+Không có nút NGHE.
+Không có chức năng tải lên hoặc gắn file âm thanh.
+Không tạo giọng đọc AI.
+X. NÚT GỬI LỜI CHÚC TRÊN THANH NGANG
+Đặt nút GỬI LỜI CHÚC ngay cạnh nút NHẠC NỀN.
+Khi nhấn:
+•	Mở biểu mẫu học sinh gửi lời tri ân.
+•	Không tải lại trang.
+•	Không chuyển sang trang mới.
+•	Không làm dừng nhạc nền.
+Biểu mẫu giống hệt biểu mẫu ở Chặng 4.
+Cả tên học sinh và tên thầy cô đều do học sinh tự nhập bằng văn bản tự do.
+Không có danh sách chọn học sinh hoặc giáo viên.
+XI. CHẶNG 5 – ĐỐ VUI 20/11
+Sử dụng background Đố vui 20/11 và icon trò chơi đã chuẩn bị.
+Tên: ĐỐ VUI 20/11 – CÙNG BÉ KHÁM PHÁ.
+Bé Mầm Xanh làm người dẫn chương trình.
+Thiết kế:
+•	Bảng câu hỏi lớn.
+•	Đáp án A, B, C.
+•	Nút bấm lớn, dễ thao tác.
+•	Màu sắc sinh động.
+•	Hiệu ứng hoa nở hoặc pháo giấy nhẹ khi đúng.
+•	Lời động viên khi sai.
+Bộ 5 câu hỏi
+Câu 1. Ngày 20/11 là ngày gì?
+A. Ngày Quốc tế Thiếu nhi.
+B. Ngày Nhà giáo Việt Nam.
+C. Ngày Quốc tế Phụ nữ.
+Đáp án đúng: B.
+Câu 2. Ngày 20/11, chúng mình thường gửi lời chúc đến ai?
+A. Thầy cô giáo.
+B. Các bác tài xế.
+C. Các chú bộ đội.
+Đáp án đúng: A.
+Câu 3. Món quà nào phù hợp để tặng thầy cô?
+A. Một chiếc lá rụng.
+B. Một món đồ chơi bất kỳ.
+C. Một tấm thiệp do em làm.
+Đáp án đúng: C.
+Câu 4. Việc làm nào thể hiện lòng biết ơn thầy cô?
+A. Chăm ngoan, học tốt.
+B. Nói chuyện trong giờ học.
+C. Không làm bài tập.
+Đáp án đúng: A.
+Câu 5. Khi gặp thầy cô, em nên làm gì?
+A. Quay đi chỗ khác.
+B. Lễ phép chào thầy cô.
+C. Chạy thật nhanh.
+Đáp án đúng: B.
+Cách chơi
+•	Hiển thị lần lượt từng câu.
+•	Học sinh chọn đáp án.
+•	Có nút xác nhận.
+•	Trả lời đúng: hiện lời khen và hiệu ứng hoa nở.
+•	Trả lời sai: hiện đáp án đúng và lời động viên.
+•	Có nút câu tiếp theo.
+•	Kết thúc hiển thị tổng số câu đúng.
+•	Có nút chơi lại.
+•	Có thể tặng huy hiệu ảo BÉ YÊU THẦY CÔ – NHÀ THÔNG THÁI NHÍ.
+Không yêu cầu đăng nhập.
+Không thu thập thông tin cá nhân.
+Không lưu điểm số nếu chưa có yêu cầu.
+XII. CHẶNG 6 – VƯƠN MÌNH ĐÓN NẮNG
+Sử dụng background Vươn mình đón nắng đã chuẩn bị.
+Thiết kế:
+•	Bình minh.
+•	Mặt trời.
+•	Cầu vồng.
+•	Hoa nở.
+•	Mầm cây vươn lên.
+•	Bé Mầm Xanh dang tay đón nắng.
+Nội dung kết:
+"Mỗi hạt mầm hôm nay sẽ lớn lên thành những chồi xanh của ngày mai.
+Rồi sẽ có một ngày chúng em rời khỏi lớp học này, chiếc bàn nhỏ sẽ dành cho những bạn học sinh khác, những trang vở hôm nay cũng sẽ cũ đi.
+Nhưng có lẽ rất lâu sau đó, chúng em vẫn còn nhớ một giọng nói từng gọi tên mình, một bàn tay từng sửa lại nét chữ, một câu "Con làm được mà" trong những ngày chúng em chưa đủ tin vào chính mình.
+Những bài học, tình yêu thương và sự tận tâm của thầy cô sẽ luôn là hành trang quý giá trên hành trình trưởng thành của chúng em.
+Nhân ngày Nhà giáo Việt Nam 20/11, chúng em kính chúc thầy cô luôn mạnh khỏe, hạnh phúc và thành công.
+MẦM XANH – Ươm yêu thương, Gặt tương lai.
+Tập thể học sinh lớp 1/8 kính tặng!"
+Đây là chặng cuối cùng.
+Không tạo thêm nội dung hoặc chặng phía sau.
+XIII. HIỆU ỨNG HOA RƠI
+Tạo hiệu ứng Falling Petals Animation xuyên suốt website.
+•	Cánh hoa hồng phấn.
+•	Hoa trắng kem.
+•	Hoa vàng nhạt.
+•	Lá xanh non.
+•	Rơi nhẹ từ trên xuống.
+•	Xoay nhẹ.
+•	Tốc độ và hướng rơi khác nhau.
+•	Lặp lại tự nhiên.
+•	Không che chữ, ảnh, nút bấm và nội dung.
+•	Không cản thao tác.
+•	pointer-events: none.
+•	Desktop khoảng 20–30 cánh.
+•	Mobile khoảng 8–12 cánh.
+•	Sử dụng CSS animation nhẹ.
+•	Tôn trọng prefers-reduced-motion.
+XIV. NHẠC NỀN WEBSITE
+Sử dụng bài "Người gieo Mầm Xanh" bản không lời do giáo viên cung cấp.
+Yêu cầu:
+•	Phát sau tương tác đầu tiên để phù hợp quy định autoplay của trình duyệt.
+•	Có nút bật/tắt.
+•	Có thanh điều chỉnh âm lượng.
+•	Âm lượng mặc định khoảng 30%.
+•	Có thể phát lặp lại.
+•	Không khởi động lại khi cuộn giữa các chặng.
+•	Không thay bài nhạc khác.
+•	Không tự động phát khi trình duyệt chưa cho phép.
+•	Nếu chưa có file MP3, để vị trí cấu hình để giáo viên tải lên.
+Nhạc nền không được ảnh hưởng đến âm thanh của nút NGHE trong 9 phong thư.
+Khi phát lời chúc trong phong thư, cần quản lý âm thanh hợp lý để người xem nghe rõ, tránh hai âm thanh phát chồng lấn.
+XV. TRANG QUẢN TRỊ /admin
+Tạo trang quản trị riêng tại đường dẫn /admin.
+Không hiển thị đường dẫn này trong menu công khai.
+Chỉ giáo viên được cấp quyền mới được đăng nhập.
+Giao diện tiếng Việt, trực quan, dễ sử dụng với giáo viên không chuyên công nghệ.
+1. Bảng điều khiển
+Hiển thị:
+•	Tổng số học sinh.
+•	Tổng số sản phẩm.
+•	Tổng số ảnh kỷ niệm.
+•	Tổng số lời tri ân.
+•	Số lời tri ân chờ duyệt.
+•	Số lời tri ân đã duyệt.
+2. Quản lý 33 học sinh
+Cho phép:
+•	Thêm học sinh.
+•	Sửa thông tin.
+•	Xóa học sinh.
+•	Tìm kiếm theo tên.
+•	Sắp xếp.
+•	Quản lý ảnh đại diện.
+•	Quản lý sản phẩm.
+Mỗi học sinh có thẻ quản lý riêng:
+•	Ảnh đại diện.
+•	Tên học sinh.
+•	Xem ảnh.
+•	Thay ảnh.
+•	Xóa ảnh.
+•	Sửa thông tin.
+3. Thay ảnh đại diện từng học sinh
+Đây là chức năng bắt buộc.
+Giáo viên có thể thay ảnh riêng của từng học sinh mà không cần sửa mã nguồn.
+Quy trình:
+1.	Vào Quản lý học sinh.
+2.	Tìm học sinh.
+3.	Nhấn THAY ẢNH.
+4.	Chọn PNG hoặc JPG từ máy tính.
+5.	Xem trước ảnh.
+6.	Xác nhận hoặc hủy.
+7.	Tải ảnh mới lên Supabase Storage.
+8.	Cập nhật đúng bản ghi học sinh.
+9.	Website công khai hiển thị ảnh mới.
+Yêu cầu:
+•	Không ảnh hưởng 32 học sinh khác.
+•	Không thay đổi tên và sản phẩm.
+•	Không dùng AI chỉnh sửa ảnh.
+•	Không tự động ghép hoặc thay mặt.
+•	Giữ tỷ lệ và chất lượng ảnh.
+•	Có thông báo thành công hoặc thất bại.
+•	Nếu tải ảnh mới thất bại, giữ ảnh cũ.
+•	Không xóa ảnh cũ trước khi ảnh mới tải thành công.
+•	Chỉ quản trị viên được thay ảnh.
+•	Có thể thay ảnh nhiều lần.
+4. Quản lý sản phẩm học sinh
+Cho phép:
+•	Chọn học sinh.
+•	Tải ảnh thiệp.
+•	Tải tranh vẽ.
+•	Nhập lời chúc.
+•	Tải video.
+•	Thêm nhiều sản phẩm cho một học sinh.
+•	Chỉnh sửa, xóa và xem trước.
+5. Quản lý 9 giáo viên và 9 phong thư
+•	Hiển thị đúng 9 giáo viên.
+•	Chỉnh sửa thông tin giáo viên.
+•	Quản lý nội dung văn bản của từng phong thư.
+•	Quản lý file âm thanh riêng của từng phong thư.
+•	Nghe thử âm thanh.
+•	Thay file.
+•	Xóa file.
+•	Hiển thị trạng thái có hoặc chưa có âm thanh.
+Mỗi phong thư phải có nội dung văn bản độc lập và file âm thanh độc lập.
+Không để file âm thanh thay thế văn bản.
+6. Quản lý lời tri ân bổ sung
+•	Xem danh sách lời tri ân học sinh gửi.
+•	Hiển thị tên học sinh tự nhập.
+•	Hiển thị tên thầy cô tự nhập.
+•	Hiển thị nội dung.
+•	Xem ảnh thiệp.
+•	Duyệt.
+•	Từ chối.
+•	Xóa nội dung không phù hợp.
+Những lời nhắn này không có file âm thanh.
+7. Quản lý Cây Tri Ân
+•	Tự động tạo trái tim khi lời tri ân được duyệt.
+•	Mỗi trái tim liên kết với một lời nhắn.
+•	Hiển thị chính xác người gửi và người nhận.
+•	Có thể ẩn hoặc hiện nội dung theo quyền quản trị.
+•	Khi lời tri ân bị gỡ công khai, trái tim tương ứng cũng được cập nhật theo trạng thái.
+8. Quản lý album
+•	Tải ảnh.
+•	Nhập chú thích.
+•	Sắp xếp.
+•	Sửa.
+•	Xóa.
+9. Quản lý cài đặt
+•	Nhạc nền.
+•	Ảnh bìa.
+•	Lời ngỏ.
+•	Lời kết.
+•	Hiệu ứng hoa rơi.
+•	Các nội dung có thể cập nhật khác.
+XVI. SUPABASE VÀ NETLIFY
+Sử dụng Supabase Free cho cơ sở dữ liệu và lưu trữ file; Netlify để triển khai website.
+Cấu trúc dữ liệu có thể gồm:
+•	students
+•	student_products
+•	teachers
+•	teacher_letters
+•	teacher_audio
+•	teacher_messages
+•	memories
+•	settings
+•	admin_users
+Có thể điều chỉnh cấu trúc phù hợp mã nguồn hiện tại nhưng phải bảo đảm dữ liệu được liên kết chính xác.
+1. students
+Lưu:
+•	ID.
+•	Tên học sinh.
+•	Đường dẫn ảnh đại diện.
+•	Thứ tự hiển thị.
+•	Trạng thái.
+•	Thời gian cập nhật.
+2. student_products
+Lưu:
+•	ID sản phẩm.
+•	ID học sinh.
+•	Tên sản phẩm.
+•	Loại sản phẩm.
+•	Đường dẫn file.
+•	Nội dung.
+•	Thứ tự hiển thị.
+•	Thời gian tạo.
+3. teachers
+Lưu thông tin 9 giáo viên.
+4. teacher_letters
+Lưu:
+•	ID phong thư.
+•	ID giáo viên.
+•	Nội dung lời chúc bằng văn bản.
+•	Thứ tự hiển thị.
+5. teacher_audio
+Lưu:
+•	ID file âm thanh.
+•	ID phong thư.
+•	Đường dẫn file.
+•	Định dạng.
+•	Thời gian cập nhật.
+Mỗi phong thư chỉ phát file âm thanh được gắn với chính nó.
+6. teacher_messages
+Lưu:
+•	Tên học sinh tự nhập.
+•	Tên thầy cô tự nhập.
+•	Nội dung lời tri ân.
+•	Đường dẫn ảnh thiệp nếu có.
+•	Thời gian gửi.
+•	Trạng thái duyệt.
+Không tạo trường âm thanh trong chức năng lời nhắn bổ sung.
+7. memories
+Lưu ảnh kỷ niệm và chú thích.
+8. settings
+Lưu cài đặt website.
+9. Bảo mật
+•	Sử dụng Supabase Auth cho quản trị viên.
+•	Sử dụng Row Level Security.
+•	Không lưu mật khẩu trực tiếp trong mã nguồn.
+•	Không đưa service_role key vào frontend.
+•	Khóa bí mật đặt trong biến môi trường.
+•	Người xem công khai chỉ đọc nội dung đã duyệt.
+•	Chỉ quản trị viên được thêm, sửa, xóa, duyệt.
+•	Chỉ quản trị viên được thay ảnh đại diện học sinh.
+•	File ảnh và âm thanh lưu trong Supabase Storage.
+•	Không tự ý bật dịch vụ tính phí.
+•	Không yêu cầu giáo viên gửi mật khẩu hoặc khóa bí mật qua chat.
+Biểu mẫu gửi lời tri ân công khai chỉ được phép tạo bản ghi chờ duyệt và tải tệp theo giới hạn an toàn.
+XVII. RESPONSIVE VÀ HIỆU NĂNG
+Máy tính:
+•	Bố cục rộng.
+•	Hai thanh điều hướng phù hợp.
+•	Hình ảnh rõ nét.
+•	Các chặng có khoảng cách hợp lý.
+Điện thoại:
+•	Nội dung một cột.
+•	Menu thu gọn.
+•	Hình ảnh tự co giãn.
+•	Nút bấm đủ lớn.
+•	Không tràn ngang.
+•	Không che nội dung.
+•	Giảm mật độ hiệu ứng.
+Hiệu năng:
+•	Lazy loading ảnh.
+•	Nén ảnh phù hợp.
+•	Không tải toàn bộ video cùng lúc.
+•	Tối ưu âm thanh.
+•	Hạn chế thư viện nặng.
+•	Tối ưu CSS animation.
+•	Không làm chậm trang.
+XVIII. BẢO TOÀN DỰ ÁN
+Các quy định bắt buộc:
+1.	Kiểm tra toàn bộ dự án trước khi sửa.
+2.	Giữ nguyên dữ liệu và hình ảnh đã có.
+3.	Không tạo lại website từ đầu.
+4.	Không tự ý thay đổi tên lớp, trường và thầy cô.
+5.	Không tạo dữ liệu giả cho 33 học sinh.
+6.	Không thay đổi khuôn mặt học sinh.
+7.	Không tạo lại các ảnh mầm cây đã chuẩn bị.
+8.	Không làm mất nhạc nền hoặc tài sản hình ảnh.
+9.	Không làm mất chức năng quản trị.
+10.	Không đưa /admin vào menu công khai.
+11.	Không thêm chặng ngoài 6 chặng đã xác định.
+12.	Không gộp đố vui vào chặng khác.
+13.	Không thêm các khu vực rời rạc.
+14.	Không thay đổi thiết kế đã được duyệt nếu không cần thiết.
+15.	Nếu chức năng chưa có, bổ sung đúng vị trí.
+16.	Không ghi đè ảnh cũ trước khi ảnh mới tải thành công.
+17.	Không tuyên bố hoàn thành nếu chưa kiểm thử.
+18.	Không làm mất liên kết dữ liệu giữa học sinh và sản phẩm.
+19.	Không gộp file âm thanh của 9 phong thư với lời nhắn bổ sung.
+20.	Không thay văn bản trong 9 phong thư bằng file âm thanh.
+21.	Không tạo nút NGHE cho lời nhắn bổ sung trên Cây Tri Ân.
+22.	Không hiển thị trái tim trên cây khi lời tri ân chưa được duyệt.
+XIX. QUY TRÌNH THỰC HIỆN
+Thực hiện theo từng giai đoạn.
+GIAI ĐOẠN 1 – KIỂM TRA DỰ ÁN
+•	Kiểm tra mã nguồn.
+•	Kiểm tra trang chủ.
+•	Kiểm tra 6 chặng.
+•	Kiểm tra trang quản trị.
+•	Kiểm tra Supabase.
+•	Kiểm tra hình ảnh.
+•	Kiểm tra dữ liệu.
+•	Báo cáo chức năng đã có và còn thiếu.
+Không sửa hoặc xóa dữ liệu trước khi kiểm tra.
+GIAI ĐOẠN 2 – HOÀN THIỆN GIAO DIỆN
+•	Trang chủ full màn hình.
+•	Thanh ngang.
+•	Thanh dọc.
+•	Sáu banner.
+•	Sáu background.
+•	Bộ nhận diện 3D.
+•	Mascot.
+•	Nút GỬI LỜI CHÚC.
+•	Nhạc nền.
+•	Hoa rơi.
+GIAI ĐOẠN 3 – HOÀN THIỆN SÁU CHẶNG
+•	Lời ngỏ.
+•	33 học sinh.
+•	Album kỷ niệm.
+•	9 phong thư.
+•	Cây Tri Ân.
+•	Đố vui.
+•	Khúc kết.
+GIAI ĐOẠN 4 – HOÀN THIỆN TƯƠNG TÁC
+•	Mở từng nhân vật học sinh.
+•	Xem sản phẩm.
+•	Mở phong thư.
+•	Đọc lời chúc.
+•	Nghe âm thanh của từng phong thư.
+•	Gửi lời tri ân.
+•	Duyệt lời tri ân.
+•	Tạo trái tim trên Cây Tri Ân.
+•	Nhấn trái tim để xem lời nhắn.
+•	Chơi trò chơi 20/11.
+GIAI ĐOẠN 5 – HOÀN THIỆN QUẢN TRỊ
+•	Đăng nhập.
+•	Phân quyền.
+•	Quản lý 33 học sinh.
+•	Thay ảnh riêng từng học sinh.
+•	Quản lý sản phẩm.
+•	Quản lý 9 giáo viên.
+•	Quản lý 9 phong thư.
+•	Quản lý 9 file âm thanh.
+•	Duyệt lời tri ân bổ sung.
+•	Quản lý Cây Tri Ân.
+•	Quản lý album.
+•	Quản lý cài đặt.
+GIAI ĐOẠN 6 – KIỂM THỬ
+Kiểm tra đầy đủ:
+•	Trang chủ full màn hình.
+•	Không có tiêu đề trùng lặp.
+•	Chỉ có nút Khám phá báo tường.
+•	Đúng thứ tự 6 chặng.
+•	Đủ 33 học sinh.
+•	Đúng ảnh từng học sinh.
+•	Thay ảnh từng em.
+•	Không ảnh hưởng ảnh và sản phẩm của em khác.
+•	Đủ 9 phong thư.
+•	Mỗi phong thư có văn bản.
+•	Mỗi phong thư phát đúng file âm thanh.
+•	Không tự phát âm thanh.
+•	Lời nhắn bổ sung không có nút nghe.
+•	Chỉ lời tri ân đã duyệt mới tạo trái tim.
+•	Nhấn trái tim hiển thị đúng người gửi, người nhận và lời nhắn.
+•	Trò chơi hoạt động.
+•	Nhạc nền hoạt động.
+•	Hoa rơi không che nội dung.
+•	Trang quản trị hoạt động.
+•	Bảo mật và phân quyền.
+•	Hiển thị tốt trên máy tính và điện thoại.
+GIAI ĐOẠN 7 – TRIỂN KHAI
+•	Kiểm tra cấu hình môi trường.
+•	Kiểm tra Supabase.
+•	Chuẩn bị triển khai Netlify.
+•	Kiểm tra website sau khi triển khai.
+•	Hướng dẫn giáo viên quản lý nội dung và cập nhật ảnh.
+XX. CÁCH LÀM VIỆC VỚI GIÁO VIÊN
+Tôi là giáo viên tiểu học, không chuyên lập trình.
+Vì vậy:
+•	Giải thích bằng tiếng Việt đơn giản.
+•	Hướng dẫn từng bước.
+•	Ưu tiên thực hiện trực tiếp trên dự án.
+•	Không yêu cầu tôi tự sửa nhiều dòng mã phức tạp.
+•	Báo cáo rõ phần đã hoàn thành và phần còn thiếu.
+•	Nêu tên các tệp đã thay đổi.
+•	Nếu cần tôi tải ảnh hoặc cung cấp thông tin, hãy hướng dẫn cụ thể.
+•	Không yêu cầu tôi gửi mật khẩu hoặc khóa bí mật.
+•	Không tự ý chuyển giai đoạn nếu còn lỗi nghiêm trọng.
+•	Không tuyên bố đã kết nối hoặc triển khai thành công nếu chưa thực hiện và kiểm tra thực tế.
+XXI. YÊU CẦU BẮT ĐẦU
+Trước tiên, hãy kiểm tra dự án MẦM XANH hiện tại và báo cáo:
+1.	Cấu trúc dự án hiện tại.
+2.	Các chức năng đã hoàn thiện.
+3.	Các chức năng còn thiếu.
+4.	Những hình ảnh đã có.
+5.	Những dữ liệu đã có.
+6.	Tình trạng kết nối Supabase.
+7.	Tình trạng trang quản trị.
+8.	Những nội dung cần bổ sung.
+Không xóa hoặc chỉnh sửa dữ liệu trước khi kiểm tra.
+Sau khi báo cáo, hãy đề xuất thứ tự thực hiện và bắt đầu hoàn thiện theo từng giai đoạn.
+MỤC TIÊU CUỐI CÙNG
+Xây dựng một website báo tường điện tử MẦM XANH đẹp, sinh động, giàu cảm xúc, dễ sử dụng và có khả năng quản trị lâu dài.
+Website phải có:
+•	Trang bìa full màn hình.
+•	Đúng 6 chặng.
+•	Bộ nhận diện 3D cartoon đồng bộ.
+•	33 ảnh học sinh gốc.
+•	Chức năng thay ảnh từng học sinh.
+•	Sản phẩm riêng của từng em.
+•	Album ảnh kỷ niệm.
+•	9 phong thư có lời chúc bằng văn bản và nút nghe âm thanh riêng.
+•	Cây Tri Ân tự động tạo trái tim từ những lời nhắn được duyệt.
+•	Lời nhắn bổ sung chỉ có văn bản và ảnh thiệp tùy chọn.
+•	Trò chơi Đố vui 20/11.
+•	Nhạc nền.
+•	Hiệu ứng hoa rơi.
+•	Trang quản trị riêng.
+•	Kết nối Supabase và triển khai Netlify.
+ƯU TIÊN HÀNG ĐẦU: BẢO TOÀN DỰ ÁN, ĐÚNG YÊU CẦU, DỄ SỬ DỤNG, HOẠT ĐỘNG ỔN ĐỊNH VÀ KHÔNG LÀM MẤT DỮ LIỆU.
+

@@ -1,0 +1,6 @@
+{
+  "name": "Mầm Xanh – Báo tường điện tử 20/11 Lớp 1/8",
+  "description": "Báo tường điện tử Mầm Xanh – Ươm yêu thương, Gặt tương lai. Tập thể lớp 1/8 – Trường Tiểu học Huỳnh Ngọc Huệ chào mừng Ngày Nhà giáo Việt Nam 20/11.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
