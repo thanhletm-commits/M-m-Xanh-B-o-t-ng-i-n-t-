@@ -27,6 +27,13 @@ jobs:
         id: pages
       - run: bun install --frozen-lockfile
       - run: bun run build --mode pages --base "${{ steps.pages.outputs.base_path }}/"
+        env:
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+      - name: Create direct admin entry point
+        run: |
+          mkdir -p dist/admin
+          cp dist/index.html dist/admin/index.html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

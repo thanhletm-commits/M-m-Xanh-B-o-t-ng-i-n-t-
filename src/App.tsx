@@ -1,4 +1,4 @@
-import { isStaticPages, publicAsset } from './lib/site';
+import { adminPath, isStaticPages, publicAsset, siteHome } from './lib/site';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AdminPage } from './components/AdminPage';
 import { FallingPetals } from './components/FallingPetals';
@@ -15,7 +15,10 @@ import { Stage6Sunlight } from './components/Stage6Sunlight';
 import { StageHome } from './components/StageHome';
 import { WishModal } from './components/WishModal';
 import { fetchPublicData } from './services/api';
+import { isSupabaseConfigured } from './services/supabaseClient';
 import type { PublicDataPayload, StageId } from './types/mamxanh';
+
+const demoMode = isStaticPages && !isSupabaseConfigured();
 
 const STAGE_ORDER: StageId[] = [
   'home',
@@ -33,7 +36,7 @@ function getInitialRoute(): { isAdmin: boolean; stage: StageId; hasDeepLink: boo
   }
   const path = window.location.pathname;
   const hash = window.location.hash;
-  if (!isStaticPages && (path === '/admin' || hash === '#admin')) {
+  if (path === adminPath || path === adminPath + '/' || hash === '#admin') {
     return { isAdmin: true, stage: 'home', hasDeepLink: false };
   }
   const hashStage = hash.replace('#', '') as StageId;
@@ -94,8 +97,8 @@ export default function App() {
     setCurrentStage(stage);
     manualScrollLockUntilRef.current = Date.now() + (instant ? 150 : 800);
 
-    if (window.location.pathname === '/admin') {
-      window.history.pushState({}, '', stage === 'home' ? '/' : `/#${stage}`);
+    if (getInitialRoute().isAdmin) {
+      window.history.pushState({}, '', stage === 'home' ? siteHome : siteHome + '#' + stage);
     } else {
       const targetHash = stage === 'home' ? '' : `#${stage}`;
       if (window.location.hash !== targetHash) {
@@ -185,12 +188,6 @@ export default function App() {
     };
   }, [isAdminRoute, loading, data]);
 
-  const openAdmin = () => {
-    setIsAdminRoute(true);
-    window.history.pushState({}, '', '/admin');
-    window.scrollTo({ top: 0, behavior: 'auto' });
-  };
-
   const handleToggleMusic = () => {
     pausedBgForLetterRef.current = false;
     setIsPlaying((prev) => {
@@ -235,11 +232,7 @@ export default function App() {
   if (isAdminRoute) {
     return (
       <AdminPage
-        onBackToSite={() => {
-          setIsAdminRoute(false);
-          window.history.pushState({}, '', '/');
-          window.scrollTo({ top: 0, behavior: 'auto' });
-        }}
+        onBackToSite={() => scrollToStage('home', true)}
         onDataUpdated={() => void loadPublic()}
       />
     );
@@ -326,7 +319,7 @@ export default function App() {
         <Stage4SeedPlanters
           teachers={data.teachers}
           approvedMessages={data.approvedMessages}
-          onOpenWishModal={isStaticPages ? undefined : () => setWishModalOpen(true)}
+          onOpenWishModal={demoMode ? undefined : () => setWishModalOpen(true)}
           onTeacherAudioStart={handleTeacherAudioStart}
           onTeacherAudioStop={handleTeacherAudioStop}
           onPrev={() => scrollToStage('stage3')}
@@ -350,24 +343,20 @@ export default function App() {
           <p className="font-semibold">
             Báo tường điện tử Mầm Xanh · Tập thể lớp 1/8 – Trường Tiểu học Huỳnh Ngọc Huệ
           </p>
-          {isStaticPages ? (
-            <p>Bản xem tĩnh · Nội dung minh họa</p>
-          ) : (
-            <button
-              type="button"
-              onClick={openAdmin}
-              className="text-xs font-semibold text-[#5C795D] hover:text-[#235F1E] underline-offset-4 hover:underline cursor-pointer"
-            >
-              Dành cho giáo viên quản trị
-            </button>
-          )}
+          {demoMode && <p>Bản xem tĩnh · Nội dung minh họa</p>}
+          <a
+            href={isStaticPages ? adminPath + '/' : adminPath}
+            className="text-xs font-semibold text-[#5C795D] underline-offset-4 hover:text-[#235F1E] hover:underline sm:ml-auto"
+          >
+            Dành cho giáo viên quản trị
+          </a>
         </div>
       </footer>
 
       <MascotDialog dialogue={currentDialogue} stageKey={currentStage} />
 
       <FloatingActions
-        onOpenWishModal={isStaticPages ? undefined : () => setWishModalOpen(true)}
+        onOpenWishModal={demoMode ? undefined : () => setWishModalOpen(true)}
         isPlaying={isPlaying}
         volume={volume}
         musicTitle={data.settings.musicTitle}

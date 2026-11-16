@@ -141,7 +141,10 @@ function mapWishRow(r: Record<string, unknown>): WishMessage {
 }
 
 function mapSettingsRow(r: Record<string, unknown> | null): SiteSettings {
-  if (!r) return INITIAL_SEED_DATA.settings;
+  if (!r) {
+    const settings = INITIAL_SEED_DATA.settings;
+    return { ...settings, musicUrl: settings.musicUrl ? publicAsset(settings.musicUrl) : null };
+  }
   const rawDialogues = (r.dialogues as Partial<SiteSettings['dialogues']>) || {};
   return {
     introTitle: String(r.intro_title || INITIAL_SEED_DATA.settings.introTitle),
@@ -150,7 +153,7 @@ function mapSettingsRow(r: Record<string, unknown> | null): SiteSettings {
     outroQuote: String(r.outro_quote || INITIAL_SEED_DATA.settings.outroQuote),
     outroClosing: String(r.outro_closing || INITIAL_SEED_DATA.settings.outroClosing),
     musicTitle: String(r.music_title || INITIAL_SEED_DATA.settings.musicTitle),
-    musicUrl: r.music_url ? String(r.music_url) : INITIAL_SEED_DATA.settings.musicUrl,
+    musicUrl: publicAsset(String(r.music_url || INITIAL_SEED_DATA.settings.musicUrl || '')) || null,
     coverImageUrl: r.cover_image_url ? String(r.cover_image_url) : null,
     fallingPetalsEnabled:
       r.falling_petals_enabled !== undefined ? Boolean(r.falling_petals_enabled) : true,

@@ -1,3 +1,4 @@
+import { isStaticPages } from '../lib/site';
 import { useCallback, useEffect, useState } from 'react';
 import {
   ArrowDown,
@@ -86,7 +87,8 @@ interface AvatarPreviewState {
 }
 
 export function AdminPage({ onBackToSite, onDataUpdated }: AdminPageProps) {
-  const [checkingAuth, setCheckingAuth] = useState(true);
+  const adminUnavailable = isStaticPages && !isSupabaseConfigured();
+  const [checkingAuth, setCheckingAuth] = useState(!adminUnavailable);
   const [authenticated, setAuthenticated] = useState(false);
   const [teacherUsername, setTeacherUsername] = useState('');
   const supabaseMode = isSupabaseConfigured();
@@ -159,6 +161,7 @@ export function AdminPage({ onBackToSite, onDataUpdated }: AdminPageProps) {
   }, []);
 
   useEffect(() => {
+    if (adminUnavailable) return;
     let active = true;
     checkAdminSession()
       .then(async (session) => {
@@ -177,7 +180,7 @@ export function AdminPage({ onBackToSite, onDataUpdated }: AdminPageProps) {
     return () => {
       active = false;
     };
-  }, [loadAdmin]);
+  }, [adminUnavailable, loadAdmin]);
 
   useEffect(() => {
     return () => {
@@ -325,7 +328,9 @@ export function AdminPage({ onBackToSite, onDataUpdated }: AdminPageProps) {
             Trang Quản Trị Giáo Viên
           </h1>
           <p className="mt-1.5 text-sm text-[#576E57]">
-            Đăng nhập bằng tài khoản giáo viên lớp 1/8 để cập nhật 33 ảnh học sinh, sản phẩm và duyệt lời chúc 20/11.
+            {adminUnavailable
+              ? 'Trang quản trị trên GitHub Pages cần kết nối Supabase để giáo viên đăng nhập và lưu thay đổi.'
+              : 'Đăng nhập bằng tài khoản giáo viên lớp 1/8 để cập nhật 33 ảnh học sinh, sản phẩm và duyệt lời chúc 20/11.'}
           </p>
 
           {loginError && (
@@ -337,51 +342,53 @@ export function AdminPage({ onBackToSite, onDataUpdated }: AdminPageProps) {
             </div>
           )}
 
-          <form onSubmit={handleLogin} className="mt-5 space-y-4">
-            <div>
-              <label
-                htmlFor="admin-username"
-                className="block text-xs font-bold uppercase tracking-wider text-[#3F5C3F] mb-1.5"
-              >
-                {supabaseMode ? 'Email tài khoản giáo viên' : 'Tên đăng nhập'}
-              </label>
-              <input
-                id="admin-username"
-                type={supabaseMode ? 'email' : 'text'}
-                value={usernameInput}
-                onChange={(e) => setUsernameInput(e.target.value)}
-                required
-                placeholder={supabaseMode ? 'giaovien@truong.edu.vn' : 'giaovien'}
-                className="w-full px-4 py-2.5 rounded-xl border border-[#CBE4C7] text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#65B741]"
-              />
-            </div>
+          {!adminUnavailable && (
+            <form onSubmit={handleLogin} className="mt-5 space-y-4">
+              <div>
+                <label
+                  htmlFor="admin-username"
+                  className="block text-xs font-bold uppercase tracking-wider text-[#3F5C3F] mb-1.5"
+                >
+                  {supabaseMode ? 'Email tài khoản giáo viên' : 'Tên đăng nhập'}
+                </label>
+                <input
+                  id="admin-username"
+                  type={supabaseMode ? 'email' : 'text'}
+                  value={usernameInput}
+                  onChange={(e) => setUsernameInput(e.target.value)}
+                  required
+                  placeholder={supabaseMode ? 'giaovien@truong.edu.vn' : 'giaovien'}
+                  className="w-full px-4 py-2.5 rounded-xl border border-[#CBE4C7] text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#65B741]"
+                />
+              </div>
 
-            <div>
-              <label
-                htmlFor="admin-password"
-                className="block text-xs font-bold uppercase tracking-wider text-[#3F5C3F] mb-1.5"
-              >
-                Mật khẩu giáo viên
-              </label>
-              <input
-                id="admin-password"
-                type="password"
-                value={passwordInput}
-                onChange={(e) => setPasswordInput(e.target.value)}
-                required
-                placeholder="Nhập mật khẩu quản trị..."
-                className="w-full px-4 py-2.5 rounded-xl border border-[#CBE4C7] text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#65B741]"
-              />
-            </div>
+              <div>
+                <label
+                  htmlFor="admin-password"
+                  className="block text-xs font-bold uppercase tracking-wider text-[#3F5C3F] mb-1.5"
+                >
+                  Mật khẩu giáo viên
+                </label>
+                <input
+                  id="admin-password"
+                  type="password"
+                  value={passwordInput}
+                  onChange={(e) => setPasswordInput(e.target.value)}
+                  required
+                  placeholder="Nhập mật khẩu quản trị..."
+                  className="w-full px-4 py-2.5 rounded-xl border border-[#CBE4C7] text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#65B741]"
+                />
+              </div>
 
-            <button
-              type="submit"
-              disabled={loggingIn}
-              className="garden-btn-primary w-full py-3 rounded-xl text-white font-display font-extrabold text-sm cursor-pointer disabled:opacity-60"
-            >
-              {loggingIn ? 'Đang đăng nhập...' : 'Đăng nhập quản trị'}
-            </button>
-          </form>
+              <button
+                type="submit"
+                disabled={loggingIn}
+                className="garden-btn-primary w-full py-3 rounded-xl text-white font-display font-extrabold text-sm cursor-pointer disabled:opacity-60"
+              >
+                {loggingIn ? 'Đang đăng nhập...' : 'Đăng nhập quản trị'}
+              </button>
+            </form>
+          )}
         </div>
       </main>
     );
