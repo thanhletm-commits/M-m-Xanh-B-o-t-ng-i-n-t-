@@ -913,7 +913,7 @@ export function AdminPage({ onBackToSite, onDataUpdated }: AdminPageProps) {
                   onChange={(e) => setStudentSort(e.target.value as 'order' | 'name')}
                   className="px-3 py-2 rounded-xl border border-[#CFE4CB] text-xs sm:text-sm font-semibold"
                 >
-                  <option value="order">Sắp xếp theo STT (1 → 33)</option>
+                  <option value="order">Sắp xếp theo STT tăng dần</option>
                   <option value="name">Sắp xếp theo tên (A → Z)</option>
                 </select>
               </div>
