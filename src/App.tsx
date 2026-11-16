@@ -65,9 +65,10 @@ export default function App() {
   );
   const manualScrollLockUntilRef = useRef<number>(0);
 
-  // Music state persisted across session, starts only on user interaction
-  const [isPlaying, setIsPlaying] = useState(false);
-  const pausedBgForLetterRef = useRef(false);
+  const [musicEnabled, setMusicEnabled] = useState(() =>
+    typeof window === 'undefined' || sessionStorage.getItem('mamxanh_music_enabled') !== '0'
+  );
+  const [isLetterPlaying, setIsLetterPlaying] = useState(false);
   const [volume, setVolume] = useState<number>(() => {
     if (typeof window === 'undefined') return 0.3;
     const saved = sessionStorage.getItem('mamxanh_music_volume');
@@ -189,39 +190,13 @@ export default function App() {
   }, [isAdminRoute, loading, data]);
 
   const handleToggleMusic = () => {
-    pausedBgForLetterRef.current = false;
-    setIsPlaying((prev) => {
-      const next = !prev;
-      sessionStorage.setItem('mamxanh_music_enabled', next ? '1' : '0');
-      return next;
-    });
+    const enabled = !musicEnabled;
+    setMusicEnabled(enabled);
+    sessionStorage.setItem('mamxanh_music_enabled', enabled ? '1' : '0');
   };
 
-  const handleTeacherAudioStart = useCallback(() => {
-    setIsPlaying((prev) => {
-      if (prev) {
-        pausedBgForLetterRef.current = true;
-        return false;
-      }
-      return prev;
-    });
-  }, []);
-
-  const handleTeacherAudioStop = useCallback(() => {
-    if (pausedBgForLetterRef.current) {
-      pausedBgForLetterRef.current = false;
-      setIsPlaying(true);
-    }
-  }, []);
-
-  const handleExploreFromCover = () => {
-    const userMuted = sessionStorage.getItem('mamxanh_music_enabled') === '0';
-    if (!isPlaying && !userMuted) {
-      setIsPlaying(true);
-      sessionStorage.setItem('mamxanh_music_enabled', '1');
-    }
-    scrollToStage('stage1');
-  };
+  const handleTeacherAudioStart = useCallback(() => setIsLetterPlaying(true), []);
+  const handleTeacherAudioStop = useCallback(() => setIsLetterPlaying(false), []);
 
   const handleVolumeChange = (val: number) => {
     const clamped = Math.max(0, Math.min(1, val));
@@ -281,9 +256,8 @@ export default function App() {
       <MusicPlayer
         musicUrl={data.settings.musicUrl}
         musicTitle={data.settings.musicTitle}
-        isPlaying={isPlaying}
+        isPlaying={musicEnabled && !isLetterPlaying}
         volume={volume}
-        onPlaybackBlocked={() => setIsPlaying(false)}
       />
 
       <Navbar
@@ -294,7 +268,7 @@ export default function App() {
       <main className="flex-1">
         <StageHome
           coverImageUrl={data.settings.coverImageUrl}
-          onExplore={handleExploreFromCover}
+          onExplore={() => scrollToStage('stage1')}
         />
 
         <Stage1FirstSprout
@@ -357,7 +331,7 @@ export default function App() {
 
       <FloatingActions
         onOpenWishModal={demoMode ? undefined : () => setWishModalOpen(true)}
-        isPlaying={isPlaying}
+        isPlaying={musicEnabled}
         volume={volume}
         musicTitle={data.settings.musicTitle}
         onToggleMusic={handleToggleMusic}

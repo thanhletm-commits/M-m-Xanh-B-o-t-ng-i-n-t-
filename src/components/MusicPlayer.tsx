@@ -5,7 +5,6 @@ interface MusicPlayerProps {
   musicTitle: string;
   isPlaying: boolean;
   volume: number; // 0 to 1
-  onPlaybackBlocked?: () => void;
 }
 
 /**
@@ -140,12 +139,11 @@ class WarmPianoSynth {
     oscOverTone.stop(now + durationSec + 0.05);
   }
 
-  start(volume: number) {
-    if (typeof window === 'undefined') return;
+  start(): Promise<void> {
     const AudioCtx =
       window.AudioContext ||
       (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-    if (!AudioCtx) return;
+    if (!AudioCtx) return Promise.resolve();
 
     if (!this.ctx) {
       this.ctx = new AudioCtx();
@@ -154,17 +152,13 @@ class WarmPianoSynth {
       this.lowpass.type = 'lowpass';
       this.lowpass.frequency.value = 2400;
       this.lowpass.Q.value = 0.6;
-      this.masterGain.gain.value = volume;
+      this.masterGain.gain.value = this.currentVolume;
       this.lowpass.connect(this.masterGain);
       this.masterGain.connect(this.ctx.destination);
     }
 
-    this.setVolume(volume);
-    if (this.ctx.state === 'suspended') {
-      void this.ctx.resume();
-    }
-
-    if (this.timer !== null) return;
+    const started = this.ctx.state === 'running' ? Promise.resolve() : this.ctx.resume();
+    if (this.timer !== null) return started;
 
     const tick = () => {
       if (!this.ctx || this.ctx.state !== 'running') return;
@@ -184,6 +178,7 @@ class WarmPianoSynth {
 
     tick();
     this.timer = window.setInterval(tick, 360);
+    return started;
   }
 
   setVolume(volume: number) {
@@ -278,7 +273,6 @@ export function MusicPlayer({
   musicUrl,
   isPlaying,
   volume,
-  onPlaybackBlocked,
 }: MusicPlayerProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const synthRef = useRef<WarmPianoSynth | null>(null);
@@ -294,31 +288,45 @@ export function MusicPlayer({
   }, []);
 
   useEffect(() => {
+    if (audioRef.current) audioRef.current.volume = volume;
+    synthRef.current?.setVolume(volume);
+  }, [volume]);
+
+  useEffect(() => {
     const audioEl = audioRef.current;
     const synth = synthRef.current;
-
-    if (musicUrl && audioEl) {
+    if (!isPlaying) {
+      audioEl?.pause();
       synth?.stop();
-      audioEl.volume = volume;
-      if (isPlaying) {
-        audioEl.play().catch(() => {
-          onPlaybackBlocked?.();
-        });
-      } else {
-        audioEl.pause();
-      }
       return;
     }
 
-    if (audioEl) {
-      audioEl.pause();
+    const stopListening = () => {
+      window.removeEventListener('click', retryAfterGesture);
+      window.removeEventListener('keydown', retryAfterGesture);
+    };
+
+    function play() {
+      const started = musicUrl && audioEl ? audioEl.play() : synth?.start();
+      void started?.then(stopListening, (error: DOMException) => {
+        if (error.name !== 'NotAllowedError') stopListening();
+      });
     }
-    if (isPlaying) {
-      synth?.start(volume);
-    } else {
+
+    function retryAfterGesture(event: Event) {
+      if (event.isTrusted) play();
+    }
+
+    window.addEventListener('click', retryAfterGesture);
+    window.addEventListener('keydown', retryAfterGesture);
+    play();
+
+    return () => {
+      stopListening();
+      audioEl?.pause();
       synth?.stop();
-    }
-  }, [musicUrl, isPlaying, volume, onPlaybackBlocked]);
+    };
+  }, [isPlaying, musicUrl]);
 
   return (
     <audio
