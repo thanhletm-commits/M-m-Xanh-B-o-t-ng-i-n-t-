@@ -11,7 +11,7 @@ import {
   X,
 } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
-import { getProductTypeLabel, getStudentProducts } from '../lib/mamxanh';
+import { getProductTypeLabel, getStudentProducts, isProductVideo } from '../lib/mamxanh';
 import type { Product, Student } from '../types/mamxanh';
 import { SproutCharacter } from './SproutCharacter';
 
@@ -258,7 +258,7 @@ export function Stage2LoveGarden({
                     </h3>
 
                     {currentProduct.mediaUrl ? (
-                      currentProduct.type === 'video' ? (
+                      isProductVideo(currentProduct.mediaUrl, currentProduct.type) ? (
                         <video
                           src={currentProduct.mediaUrl}
                           controls

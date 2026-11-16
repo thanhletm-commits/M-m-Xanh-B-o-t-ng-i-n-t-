@@ -1,3 +1,4 @@
+import { ProductAttachmentPreview } from './ProductAttachmentPreview';
 import { isStaticPages } from '../lib/site';
 import { useCallback, useEffect, useState } from 'react';
 import {
@@ -32,6 +33,7 @@ import {
   MEMORY_CATEGORIES,
   SPROUT_VARIANTS,
   getProductTypeLabel,
+  isProductVideo,
   validateStudentAvatarUpload,
   validateTeacherAudioUpload,
 } from '../lib/mamxanh';
@@ -134,7 +136,13 @@ export function AdminPage({ onBackToSite, onDataUpdated }: AdminPageProps) {
   const [newProdType, setNewProdType] = useState<ProductType>('thiep');
   const [newProdTitle, setNewProdTitle] = useState('');
   const [newProdDesc, setNewProdDesc] = useState('');
-  const [newProdMediaUrl, setNewProdMediaUrl] = useState<string | null>(null);
+  const [newProductAttachment, setNewProductAttachment] = useState<{
+    url: string;
+    name: string;
+    isVideo: boolean;
+  } | null>(null);
+  const [productMediaBusy, setProductMediaBusy] = useState(false);
+  const [creatingProduct, setCreatingProduct] = useState(false);
 
   const [newMemCategory, setNewMemCategory] = useState<MemoryCategory>(
     'Khoảnh khắc bên thầy cô'
@@ -230,6 +238,23 @@ export function AdminPage({ onBackToSite, onDataUpdated }: AdminPageProps) {
     } catch (err) {
       showToast('error', err instanceof Error ? err.message : 'Tải tệp lên thất bại.');
       return null;
+    }
+  };
+
+  const updateProductAttachment = async (productId: string, file?: File) => {
+    if (productMediaBusy) return;
+    setProductMediaBusy(true);
+    try {
+      const url = file ? await handleUpload(file, 'products') : null;
+      if (file && !url) return;
+      await adminUpdateProduct(productId, { mediaUrl: url, isDemo: false });
+      await loadAdmin();
+      onDataUpdated();
+      showToast('success', file ? 'Đã cập nhật tệp đính kèm sản phẩm.' : 'Đã gỡ tệp đính kèm khỏi sản phẩm.');
+    } catch (err) {
+      showToast('error', err instanceof Error ? err.message : 'Không thể cập nhật tệp đính kèm.');
+    } finally {
+      setProductMediaBusy(false);
     }
   };
 
@@ -1097,20 +1122,27 @@ export function AdminPage({ onBackToSite, onDataUpdated }: AdminPageProps) {
               <form
                 onSubmit={async (e) => {
                   e.preventDefault();
-                  if (!selectedStudentForProduct || !newProdTitle.trim()) return;
-                  await adminCreateProduct({
-                    studentId: selectedStudentForProduct,
-                    type: newProdType,
-                    title: newProdTitle,
-                    description: newProdDesc,
-                    mediaUrl: newProdMediaUrl,
-                  });
-                  setNewProdTitle('');
-                  setNewProdDesc('');
-                  setNewProdMediaUrl(null);
-                  await loadAdmin();
-                  onDataUpdated();
-                  showToast('success', 'Đã thêm sản phẩm mới cho học sinh.');
+                  if (!selectedStudentForProduct || !newProdTitle.trim() || productMediaBusy || creatingProduct) return;
+                  setCreatingProduct(true);
+                  try {
+                    await adminCreateProduct({
+                      studentId: selectedStudentForProduct,
+                      type: newProdType,
+                      title: newProdTitle,
+                      description: newProdDesc,
+                      mediaUrl: newProductAttachment?.url ?? null,
+                    });
+                    setNewProdTitle('');
+                    setNewProdDesc('');
+                    setNewProductAttachment(null);
+                    await loadAdmin();
+                    onDataUpdated();
+                    showToast('success', 'Đã thêm sản phẩm mới cho học sinh.');
+                  } catch (err) {
+                    showToast('error', err instanceof Error ? err.message : 'Không thể thêm sản phẩm.');
+                  } finally {
+                    setCreatingProduct(false);
+                  }
                 }}
                 className="grid sm:grid-cols-2 gap-3 pt-2 border-t border-[#EAF2E8]"
               >
@@ -1155,24 +1187,48 @@ export function AdminPage({ onBackToSite, onDataUpdated }: AdminPageProps) {
                     className="w-full px-3 py-2 rounded-xl border border-[#CFE4CB] text-sm"
                   />
                 </div>
-                <div className="flex items-center gap-3">
-                  <label className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#EEF8EA] text-[#286323] text-xs font-bold cursor-pointer">
+                <div className="space-y-2">
+                  <label className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#EEF8EA] text-[#286323] text-xs font-bold cursor-pointer has-[:disabled]:opacity-60">
                     <Upload className="w-4 h-4" />
-                    <span>{newProdMediaUrl ? 'Đã tải tệp đính kèm' : 'Tải ảnh hoặc video'}</span>
+                    <span>{newProductAttachment ? 'Đổi ảnh hoặc video' : 'Tải ảnh hoặc video'}</span>
                     <input
                       type="file"
                       accept="image/*,video/mp4,video/webm"
-                      className="hidden"
+                      className="sr-only"
+                      disabled={productMediaBusy || creatingProduct}
                       onChange={async (e) => {
-                        const url = await handleUpload(e.target.files?.[0], 'products');
-                        if (url) setNewProdMediaUrl(url);
+                        const file = e.currentTarget.files?.[0];
+                        e.currentTarget.value = '';
+                        if (!file || productMediaBusy || creatingProduct) return;
+                        setProductMediaBusy(true);
+                        try {
+                          const url = await handleUpload(file, 'products');
+                          if (url) {
+                            setNewProductAttachment({
+                              url,
+                              name: file.name,
+                              isVideo: file.type.startsWith('video/') || isProductVideo(url, 'anh_san_pham'),
+                            });
+                          }
+                        } finally {
+                          setProductMediaBusy(false);
+                        }
                       }}
                     />
                   </label>
+                  {newProductAttachment && (
+                    <ProductAttachmentPreview
+                      key={newProductAttachment.url}
+                      {...newProductAttachment}
+                      disabled={productMediaBusy || creatingProduct}
+                      onRemove={() => setNewProductAttachment(null)}
+                    />
+                  )}
                 </div>
-                <div className="flex justify-end">
+                <div className="flex justify-end self-start">
                   <button
                     type="submit"
+                    disabled={productMediaBusy || creatingProduct}
                     className="garden-btn-primary inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-white text-sm font-bold cursor-pointer"
                   >
                     <Plus className="w-4 h-4" />
@@ -1199,18 +1255,26 @@ export function AdminPage({ onBackToSite, onDataUpdated }: AdminPageProps) {
                         <input
                           type="file"
                           accept="image/*,video/mp4,video/webm"
-                          className="hidden"
-                          onChange={async (e) => {
-                            const url = await handleUpload(e.target.files?.[0], 'products');
-                            if (!url) return;
-                            await adminUpdateProduct(prod.id, { mediaUrl: url, isDemo: false });
-                            await loadAdmin();
-                            onDataUpdated();
-                            showToast('success', 'Đã cập nhật tệp đính kèm sản phẩm.');
+                          className="sr-only"
+                          disabled={productMediaBusy}
+                          onChange={(e) => {
+                            const file = e.currentTarget.files?.[0];
+                            e.currentTarget.value = '';
+                            if (file) void updateProductAttachment(prod.id, file);
                           }}
                         />
                       </label>
                     </div>
+                    {prod.mediaUrl && (
+                      <ProductAttachmentPreview
+                        key={prod.mediaUrl}
+                        url={prod.mediaUrl}
+                        name={getProductTypeLabel(prod.type) + ' · ' + prod.title}
+                        isVideo={isProductVideo(prod.mediaUrl, prod.type)}
+                        disabled={productMediaBusy}
+                        onRemove={() => void updateProductAttachment(prod.id)}
+                      />
+                    )}
                     <input
                       type="text"
                       defaultValue={prod.title}

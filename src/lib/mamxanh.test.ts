@@ -1,5 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { ProductAttachmentPreview } from '../components/ProductAttachmentPreview';
 import {
   computeQuizResult,
   computeTreeLeaves,
@@ -9,6 +12,7 @@ import {
   getMemoriesByCategory,
   getStudentProducts,
   getWishesByTeacher,
+  isProductVideo,
   MAX_UPLOAD_BYTES,
   QUIZ_BADGE_TITLE,
   QUIZ_QUESTIONS,
@@ -207,4 +211,22 @@ test('computeTreeLeaves outputs pastel pink/peach heart colors', () => {
   const allowedHeartColors = ['#FB7185', '#F472B6', '#FDA4AF', '#F9A8D4', '#FB923C', '#F43F5E'];
   assert.ok(nodes.length > 0);
   assert.ok(nodes.every((n) => allowedHeartColors.includes(n.color)));
+});
+
+test('product attachment previews show the file format and offer a non-submit remove button', () => {
+  const render = (url: string, type: 'video' | 'tranh') => renderToStaticMarkup(
+    createElement(ProductAttachmentPreview, {
+      url,
+      name: 'Tệp mẫu',
+      isVideo: isProductVideo(url, type),
+      disabled: false,
+      onRemove() {},
+    })
+  );
+  const image = render('/uploads/preview.JPG?version=1', 'video');
+  const video = render('/uploads/preview.mp4#t=0.5', 'tranh');
+  assert.match(image, /<img[^>]*alt="Tệp mẫu"/);
+  assert.match(video, /<video[^>]*controls=""/);
+  assert.match(image, /<button type="button" aria-label="Gỡ tệp đính kèm: Tệp mẫu"/);
+  assert.equal(isProductVideo('/uploads/legacy-attachment', 'video'), true);
 });

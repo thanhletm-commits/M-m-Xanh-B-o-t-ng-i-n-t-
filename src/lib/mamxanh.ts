@@ -291,6 +291,13 @@ export function validateTeacherAudioUpload(
   return { valid: true };
 }
 
+export function isProductVideo(url: string, type: Product['type']): boolean {
+  const path = url.split(/[?#]/, 1)[0];
+  if (/\.(mp4|webm|mov|m4v|ogv)$/i.test(path)) return true;
+  if (/\.(avif|bmp|gif|heic|heif|jpe?g|png|svg|webp)$/i.test(path)) return false;
+  return type === 'video';
+}
+
 export function getProductTypeLabel(type: Product['type']): string {
   switch (type) {
     case 'thiep':
