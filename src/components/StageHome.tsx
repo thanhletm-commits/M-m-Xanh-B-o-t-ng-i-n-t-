@@ -26,7 +26,7 @@ export function StageHome({ coverImageUrl, onExplore }: StageHomeProps) {
         fetchPriority="high"
         width={coverImageUrl ? undefined : 1672}
         height={coverImageUrl ? undefined : 941}
-        className="block h-auto w-full object-contain md:max-h-[max(12rem,calc(100svh-9rem))]"
+        className="block h-auto w-full"
       />
 
       {/* Single Interactive Primary CTA Button at Bottom */}
